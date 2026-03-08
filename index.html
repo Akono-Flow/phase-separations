@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phase Separations — CAPE Chemistry Unit 2 Module 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--bg:#0c1220;--surface:#131e33;--surface2:#1a2844;--surface3:#1e3052;--border:#243553;--primary:#00c6d4;--primary2:#0097a7;--amber:#f59e0b;--amber2:#d97706;--emerald:#10b981;--rose:#f43f5e;--violet:#818cf8;--text:#e2eaf5;--text2:#9ab0cc;--text3:#5c7a9a}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.7;min-height:100vh;overflow-x:hidden}
+::-webkit-scrollbar{width:5px;height:5px}::-webkit-scrollbar-track{background:var(--surface)}::-webkit-scrollbar-thumb{background:var(--surface3);border-radius:3px}
+.app-header{background:linear-gradient(135deg,#081629 0%,#0d1e3c 60%,#0c2040 100%);border-bottom:1px solid var(--border);padding:18px 28px 0;position:sticky;top:0;z-index:100;box-shadow:0 4px 30px rgba(0,0,0,.5)}
+.header-top{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.header-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--primary),var(--primary2));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.header-titles h1{font-family:'Lora',serif;font-size:1.4rem;font-weight:700;color:#fff;letter-spacing:-.02em}
+.header-titles p{font-size:.75rem;color:var(--text2);letter-spacing:.08em;text-transform:uppercase}
+.main-nav{display:flex;gap:2px;overflow-x:auto;padding-bottom:0}.main-nav::-webkit-scrollbar{height:0}
+.nav-btn{background:none;border:none;padding:9px 20px;font-family:'DM Sans',sans-serif;font-size:.84rem;font-weight:500;color:var(--text3);cursor:pointer;border-radius:8px 8px 0 0;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:6px;border-bottom:2px solid transparent}
+.nav-btn:hover{color:var(--text);background:rgba(255,255,255,.04)}.nav-btn.active{color:var(--primary);border-bottom-color:var(--primary);background:rgba(0,198,212,.08)}
+.main-content{padding:24px 28px;max-width:1400px;margin:0 auto}
+.tab-panel{display:none;animation:fadeIn .25s ease}.tab-panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+.section-title{font-family:'Lora',serif;font-size:1.65rem;font-weight:600;color:#fff;margin-bottom:5px;letter-spacing:-.02em}
+.section-subtitle{color:var(--text2);font-size:.86rem;margin-bottom:24px}
+/* COLLAPSIBLES */
+.collapsible-group{display:flex;flex-direction:column;gap:9px;margin-bottom:18px}
+.collapsible{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--surface)}
+.coll-hdr{display:flex;align-items:center;justify-content:space-between;padding:15px 18px;cursor:pointer;transition:background .2s;user-select:none;gap:10px}
+.coll-hdr:hover{background:var(--surface2)}.coll-hdr.open{background:var(--surface2);border-bottom:1px solid var(--border)}
+.coll-title-wrap{display:flex;align-items:center;gap:11px}
+.coll-ic{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.coll-lbl{font-weight:600;font-size:.93rem;color:var(--text)}
+.coll-tag{font-size:.7rem;background:rgba(0,198,212,.15);color:var(--primary);padding:2px 8px;border-radius:20px;font-weight:500}
+.coll-arrow{color:var(--text3);font-size:1rem;transition:transform .25s}.coll-hdr.open .coll-arrow{transform:rotate(180deg)}
+.coll-body{max-height:0;overflow:hidden;transition:max-height .4s ease}.coll-body.open{max-height:5000px}
+.coll-content{padding:18px 22px;line-height:1.8}
+/* NOTES */
+.np{color:var(--text);margin-bottom:11px}
+.nh3{font-family:'Lora',serif;font-size:1rem;font-weight:600;color:var(--primary);margin:18px 0 7px;padding-bottom:3px;border-bottom:1px solid var(--border)}
+.nh4{font-weight:600;color:var(--amber);margin:12px 0 5px;font-size:.9rem}
+.nl{margin:7px 0 11px 18px;color:var(--text)}.nl li{margin-bottom:4px}.nl li::marker{color:var(--primary)}
+.nbox{background:rgba(0,198,212,.07);border:1px solid rgba(0,198,212,.25);border-radius:9px;padding:13px 16px;margin:12px 0}
+.nbox.amb{background:rgba(245,158,11,.08);border-color:rgba(245,158,11,.3)}
+.nbox.rose{background:rgba(244,63,94,.07);border-color:rgba(244,63,94,.25)}
+.nbox.em{background:rgba(16,185,129,.07);border-color:rgba(16,185,129,.25)}
+.nl-lbl{font-size:.72rem;text-transform:uppercase;letter-spacing:.1em;font-weight:600;color:var(--primary);margin-bottom:4px}
+.nbox.amb .nl-lbl{color:var(--amber)}.nbox.rose .nl-lbl{color:var(--rose)}.nbox.em .nl-lbl{color:var(--emerald)}
+.formula{font-family:'JetBrains Mono',monospace;background:var(--surface3);padding:9px 14px;border-radius:7px;font-size:.88rem;margin:9px 0;color:#b8d8ff;display:block;overflow-x:auto}
+.kt{color:var(--amber);font-weight:600}
+.dtbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:.85rem}
+.dtbl th{background:var(--surface3);color:var(--primary);padding:7px 11px;text-align:left;font-weight:600;font-size:.78rem;letter-spacing:.05em;text-transform:uppercase}
+.dtbl td{padding:6px 11px;border-bottom:1px solid var(--border);color:var(--text)}
+.dtbl tr:last-child td{border-bottom:none}.dtbl tr:hover td{background:rgba(255,255,255,.02)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:9px 0}
+@media(max-width:650px){.two-col{grid-template-columns:1fr}}
+/* SIMULATOR */
+.sim-nav{display:flex;gap:5px;margin-bottom:24px;background:var(--surface);padding:5px;border-radius:11px;overflow-x:auto;flex-wrap:wrap}
+.sbtn{background:none;border:none;padding:8px 16px;font-family:'DM Sans',sans-serif;font-size:.81rem;font-weight:500;color:var(--text2);cursor:pointer;border-radius:8px;transition:all .2s;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.sbtn:hover{color:var(--text);background:var(--surface2)}.sbtn.active{color:#fff;background:linear-gradient(135deg,var(--primary2),var(--primary));box-shadow:0 2px 14px rgba(0,198,212,.35)}
+.sim-panel{display:none}.sim-panel.active{display:block;animation:fadeIn .25s ease}
+/* CHART */
+.chart-cont{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:22px;position:relative}
+.chart-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;gap:14px;flex-wrap:wrap}
+.chart-ttl{font-family:'Lora',serif;font-size:1.05rem;font-weight:600;color:#fff}
+.chart-sub{font-size:.79rem;color:var(--text2);margin-top:3px}
+.ctrls{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.ctrl-sel{background:var(--surface3);border:1px solid var(--border);color:var(--text);padding:6px 11px;border-radius:7px;font-family:'DM Sans',sans-serif;font-size:.8rem;cursor:pointer;outline:none}
+.ctrl-sel:focus{border-color:var(--primary)}
+.tog-grp{display:flex;background:var(--surface3);border:1px solid var(--border);border-radius:7px;overflow:hidden}
+.tog-btn{background:none;border:none;padding:6px 13px;font-size:.79rem;font-family:'DM Sans',sans-serif;color:var(--text2);cursor:pointer;transition:all .15s;font-weight:500}
+.tog-btn.active{background:var(--primary2);color:#fff}
+.chart-wrap{position:relative;height:340px}
+.leg{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.leg-item{display:flex;align-items:center;gap:6px;font-size:.79rem;color:var(--text2)}
+.leg-dot{width:11px;height:11px;border-radius:50%;flex-shrink:0}
+.leg-line{width:20px;height:3px;border-radius:2px;flex-shrink:0}
+/* SLIDERS */
+.sl-row{display:flex;align-items:center;gap:10px;margin:7px 0}
+.sl-lbl{font-size:.8rem;color:var(--text2);min-width:130px}
+.sl-val{font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--primary);min-width:50px;text-align:right}
+input[type=range]{flex:1;-webkit-appearance:none;height:4px;background:var(--surface3);border-radius:2px;outline:none;cursor:pointer}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;border-radius:50%;background:var(--primary);cursor:pointer;box-shadow:0 0 6px rgba(0,198,212,.5)}
+/* APPARATUS */
+.app-grid{display:grid;grid-template-columns:1fr 340px;gap:18px;align-items:start}
+@media(max-width:980px){.app-grid{grid-template-columns:1fr}}
+.canvas-wrap{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:14px;overflow:hidden}
+canvas{display:block;width:100%;border-radius:7px;background:#0a1525}
+.app-ctrl{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:18px}
+.app-ctrl h3{font-family:'Lora',serif;font-size:.96rem;font-weight:600;color:#fff;margin-bottom:14px}
+.ctrl-row{margin:9px 0}.ctrl-row label{display:block;font-size:.79rem;color:var(--text2);margin-bottom:4px}
+.big-btn{width:100%;padding:10px;background:linear-gradient(135deg,var(--primary2),var(--primary));border:none;border-radius:9px;color:#fff;font-family:'DM Sans',sans-serif;font-size:.86rem;font-weight:600;cursor:pointer;margin:7px 0;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:7px}
+.big-btn:hover{opacity:.9;transform:translateY(-1px);box-shadow:0 4px 15px rgba(0,198,212,.35)}
+.big-btn.amb{background:linear-gradient(135deg,var(--amber2),var(--amber))}.big-btn.amb:hover{box-shadow:0 4px 15px rgba(245,158,11,.35)}
+.big-btn.em{background:linear-gradient(135deg,#059669,var(--emerald))}
+.info-panel{background:var(--surface3);border-radius:9px;padding:12px;margin-top:12px;font-size:.81rem;color:var(--text2);line-height:1.7}
+.info-panel .inf-ttl{font-weight:600;color:var(--text);margin-bottom:5px;font-size:.86rem}
+.sbadge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.73rem;font-weight:600;margin-left:7px}
+.badge-run{background:rgba(16,185,129,.2);color:var(--emerald)}.badge-stop{background:rgba(94,114,140,.3);color:var(--text3)}
+/* DATA TABLES */
+.data-sec{margin-top:18px;background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:18px}
+.data-sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.data-sec h3{font-family:'Lora',serif;font-size:.95rem;font-weight:600;color:#fff}
+.exp-btn{background:var(--surface3);border:1px solid var(--border);color:var(--text2);padding:6px 13px;border-radius:7px;font-size:.78rem;cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
+.exp-btn:hover{color:var(--emerald);border-color:var(--emerald);background:rgba(16,185,129,.1)}
+.sdt{width:100%;border-collapse:collapse;font-size:.8rem}
+.sdt th{background:var(--surface3);color:var(--text2);padding:6px 11px;text-align:left;font-size:.73rem;text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.sdt td{padding:5px 11px;border-bottom:1px solid rgba(36,53,83,.5);font-family:'JetBrains Mono',monospace;color:var(--text);font-size:.78rem}
+.sdt tr:last-child td{border-bottom:none}.sdt tr:hover td{background:rgba(255,255,255,.02)}
+.tbl-empty{text-align:center;color:var(--text3);font-family:'DM Sans',sans-serif;font-style:italic;padding:18px}
+.rec-btn{background:rgba(0,198,212,.1);border:1px solid rgba(0,198,212,.3);color:var(--primary);padding:5px 11px;border-radius:6px;font-size:.77rem;cursor:pointer;transition:all .15s;font-family:'DM Sans',sans-serif}
+.rec-btn:hover{background:rgba(0,198,212,.2)}
+.clr-btn{background:rgba(244,63,94,.1);border:1px solid rgba(244,63,94,.25);color:var(--rose);padding:5px 11px;border-radius:6px;font-size:.77rem;cursor:pointer;font-family:'DM Sans',sans-serif}
+.clr-btn:hover{background:rgba(244,63,94,.18)}
+/* WORKED EXAMPLES */
+.ex-grid{display:flex;flex-direction:column;gap:14px}
+.ex-card{background:var(--surface);border:1px solid var(--border);border-radius:13px;overflow:hidden}
+.ex-hdr{display:flex;align-items:center;gap:12px;padding:16px 20px;cursor:pointer;transition:background .2s}
+.ex-hdr:hover{background:var(--surface2)}.ex-hdr.open{background:var(--surface2);border-bottom:1px solid var(--border)}
+.ex-num{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--primary2),var(--primary));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.88rem;color:#fff;flex-shrink:0}
+.ex-meta{flex:1}.ex-title{font-weight:600;font-size:.93rem;color:var(--text)}
+.ex-topic{font-size:.76rem;color:var(--primary);margin-top:2px}
+.ex-body{max-height:0;overflow:hidden;transition:max-height .4s ease}.ex-body.open{max-height:8000px}
+.ex-content{padding:20px;line-height:1.85}
+.step{margin:12px 0;padding:13px 16px;background:var(--surface2);border-radius:9px;border-left:3px solid var(--primary)}
+.step.amb{border-left-color:var(--amber)}.step.em{border-left-color:var(--emerald)}
+.step-num{font-size:.7rem;text-transform:uppercase;letter-spacing:.1em;color:var(--primary);font-weight:700;margin-bottom:5px}
+.step.amb .step-num{color:var(--amber)}.step.em .step-num{color:var(--emerald)}
+.step-txt{color:var(--text);font-size:.89rem}
+.mline{font-family:'JetBrains Mono',monospace;background:var(--surface3);padding:7px 13px;border-radius:6px;font-size:.86rem;color:#b8d8ff;margin:7px 0;display:block}
+.ans-box{background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.3);border-radius:9px;padding:11px 15px;margin-top:12px;font-weight:600;color:var(--emerald)}
+/* QUIZ */
+.quiz-layout{display:grid;grid-template-columns:270px 1fr;gap:18px;align-items:start}
+@media(max-width:880px){.quiz-layout{grid-template-columns:1fr}}
+.quiz-sidebar{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:16px;position:sticky;top:100px}
+.quiz-sidebar h3{font-family:'Lora',serif;font-size:.95rem;font-weight:600;color:#fff;margin-bottom:12px}
+.quiz-score{background:var(--surface2);border-radius:9px;padding:12px;margin-bottom:14px;text-align:center}
+.score-num{font-family:'JetBrains Mono',monospace;font-size:2rem;font-weight:700;color:var(--primary);line-height:1}
+.score-lbl{font-size:.73rem;color:var(--text2);margin-top:3px}
+.q-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin-bottom:12px}
+.q-dot{width:30px;height:30px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);font-size:.73rem;font-weight:600;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;color:var(--text2)}
+.q-dot:hover{border-color:var(--primary);color:var(--primary)}.q-dot.active{border-color:var(--primary);background:rgba(0,198,212,.15);color:var(--primary)}
+.q-dot.correct{background:rgba(16,185,129,.2);border-color:var(--emerald);color:var(--emerald)}
+.q-dot.incorrect{background:rgba(244,63,94,.15);border-color:var(--rose);color:var(--rose)}
+.flt-btn{background:var(--surface2);border:1px solid var(--border);color:var(--text2);padding:6px 9px;border-radius:6px;font-size:.76rem;cursor:pointer;text-align:left;transition:all .15s;font-family:'DM Sans',sans-serif;margin-bottom:4px;width:100%;display:block}
+.flt-btn:hover,.flt-btn.active{background:rgba(0,198,212,.1);border-color:var(--primary);color:var(--primary)}
+.quiz-main{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:26px;min-height:400px}
+.q-prog{font-size:.76rem;color:var(--text3);margin-bottom:7px;text-transform:uppercase;letter-spacing:.08em}
+.q-cat{font-size:.73rem;background:rgba(129,140,248,.15);color:var(--violet);padding:2px 9px;border-radius:20px;display:inline-block;margin-bottom:12px;font-weight:500}
+.q-text{font-size:.98rem;font-weight:500;color:var(--text);line-height:1.7;margin-bottom:20px}
+.q-opts{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.q-opt{padding:11px 16px;border:1px solid var(--border);border-radius:9px;cursor:pointer;transition:all .18s;font-size:.88rem;background:var(--surface2);color:var(--text);text-align:left;font-family:'DM Sans',sans-serif}
+.q-opt:hover:not(.disabled){border-color:var(--primary);background:rgba(0,198,212,.07);color:#fff}
+.q-opt.selected{border-color:var(--primary);background:rgba(0,198,212,.12);color:#fff}
+.q-opt.correct{border-color:var(--emerald);background:rgba(16,185,129,.15);color:var(--emerald)}
+.q-opt.incorrect{border-color:var(--rose);background:rgba(244,63,94,.1);color:var(--rose)}
+.q-opt.reveal{border-color:var(--emerald);background:rgba(16,185,129,.1);color:var(--emerald)}
+.q-opt.disabled{cursor:default}
+.q-fb{padding:13px 16px;border-radius:9px;margin-bottom:14px;font-size:.88rem;line-height:1.65}
+.q-fb.correct{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.3);color:var(--emerald)}
+.q-fb.incorrect{background:rgba(244,63,94,.09);border:1px solid rgba(244,63,94,.25);color:var(--rose)}
+.q-nav{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.qb{padding:8px 18px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:.83rem;font-weight:600;cursor:pointer;transition:all .18s}
+.qb.pri{background:linear-gradient(135deg,var(--primary2),var(--primary));color:#fff}
+.qb.sec{background:var(--surface3);border:1px solid var(--border);color:var(--text2)}
+.qb.sec:hover{color:var(--text)}.qb:hover{opacity:.88}.qb:disabled{opacity:.4;cursor:not-allowed}
+.quiz-start{text-align:center;padding:40px 0}
+.quiz-start h2{font-family:'Lora',serif;font-size:1.35rem;color:#fff;margin-bottom:11px}
+.quiz-start p{color:var(--text2);margin-bottom:22px;max-width:380px;margin-left:auto;margin-right:auto}
+.start-btn{background:linear-gradient(135deg,var(--primary2),var(--primary));border:none;color:#fff;padding:12px 30px;border-radius:9px;font-size:.93rem;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;box-shadow:0 4px 20px rgba(0,198,212,.3)}
+.start-btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,198,212,.4)}
+.azeo-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:880px){.azeo-grid{grid-template-columns:1fr}}
+@media(max-width:750px){.main-content{padding:16px 14px}.app-header{padding:13px 14px 0}}
+</style>
+</head>
+<body>
+<div class="app-header">
+  <div class="header-top">
+    <div class="header-icon">⚗️</div>
+    <div class="header-titles">
+      <h1>Phase Separations</h1>
+      <p>CAPE Chemistry · Unit 2 · Module 2 · Specific Objectives 9.1–9.7</p>
+    </div>
+  </div>
+  <nav class="main-nav">
+    <button class="nav-btn active" onclick="switchTab('notes')" id="btn-notes"><span>📚</span> Notes</button>
+    <button class="nav-btn" onclick="switchTab('sim')" id="btn-sim"><span>🔬</span> Simulations</button>
+    <button class="nav-btn" onclick="switchTab('examples')" id="btn-examples"><span>📐</span> Worked Examples</button>
+    <button class="nav-btn" onclick="switchTab('quiz')" id="btn-quiz"><span>📝</span> Quiz</button>
+  </nav>
+</div>
+<div class="main-content">
+<!-- ===== NOTES ===== -->
+<div class="tab-panel active" id="panel-notes">
+<h2 class="section-title">Chapter Notes</h2>
+<p class="section-subtitle">All content from CE and SG texts aligned with CAPE Specific Objectives 9.1–9.7. Expand each topic to study.</p>
+<div class="collapsible-group">
+
+<div class="collapsible">
+<div class="coll-hdr" onclick="tc(this)">
+  <div class="coll-title-wrap"><div class="coll-ic" style="background:rgba(0,198,212,.15)">🧪</div>
+  <div><div class="coll-lbl">Introduction &amp; Phase Separation Techniques</div><div class="coll-tag">SO 9.5</div></div></div>
+  <span class="coll-arrow">▼</span>
+</div>
+<div class="coll-body"><div class="coll-content">
+<p class="np">The word <span class="kt">'phase'</span> is synonymous with 'state of matter'. The three fundamental states of matter are solid, liquid and gas. The concept of <span class="kt">phase separation</span> involves how different types of mixtures can be separated — most techniques involve a change of state: melting, subliming, evaporating or dissolving.</p>
+<p class="np">Mixtures are impure substances. Examples of separation in everyday life:</p>
+<ul class="nl"><li>Home: water separated from pasta; tap water filtered to remove impurities.</li><li>Laboratory: chemists prepare and purify compounds.</li><li>Petroleum industry: components of crude oil are separated and selectively purified.</li></ul>
+<p class="nh3">Separation Techniques Covered (CAPE)</p>
+<table class="dtbl">
+<tr><th>Technique</th><th>Basis of Separation</th><th>Best Used For</th></tr>
+<tr><td>Simple distillation</td><td>Widely differing bp (&gt;25°C)</td><td>Two miscible liquids with large bp difference; liquid from involatile solid</td></tr>
+<tr><td>Fractional distillation</td><td>Small differences in bp</td><td>Miscible liquids with similar bp; crude oil fractions</td></tr>
+<tr><td>Vacuum distillation</td><td>bp decreases with reduced pressure</td><td>High bp or thermally decomposable liquids</td></tr>
+<tr><td>Steam distillation</td><td>Immiscible mixture boils below individual bps</td><td>Temperature-sensitive organics immiscible with water</td></tr>
+<tr><td>Solvent extraction</td><td>Different solubilities in immiscible solvents</td><td>Organic product dissolved in aqueous solution</td></tr>
+<tr><td>Separating funnel</td><td>Density difference of immiscible liquids</td><td>Two immiscible liquids</td></tr>
+</table>
+<div class="nbox em"><div class="nl-lbl">✓ Key Principle</div>The separation technique chosen depends on the <strong>differences in the physical and chemical properties</strong> of the components of the mixtures.</div>
+</div></div></div>
+
+<div class="collapsible">
+<div class="coll-hdr" onclick="tc(this)">
+  <div class="coll-title-wrap"><div class="coll-ic" style="background:rgba(245,158,11,.15)">🫧</div>
+  <div><div class="coll-lbl">Simple Distillation</div><div class="coll-tag">SO 9.1 · 9.6 · 9.7</div></div></div>
+  <span class="coll-arrow">▼</span>
+</div>
+<div class="coll-body"><div class="coll-content">
+<p class="nh3">When to Use Simple Distillation</p>
+<ul class="nl">
+<li>Liquid solutions of substances with <strong>widely differing boiling points (more than 25°C difference)</strong> — both components are obtained.</li>
+<li>Liquids from involatile solids or oils — the solvent is collected rather than the solute.</li>
+</ul>
+<div class="nbox"><div class="nl-lbl">💡 Principle</div>Distillation is based on the <strong>differences in volatilities</strong> of the components of the mixture. The more volatile component (lower bp) evaporates preferentially.</div>
+<p class="nh3">How It Works</p>
+<p class="np">When the solution in the flask boils, <strong>pure vapour</strong> rises upwards and enters the inner tube of the Liebig condenser. The outer jacket contains cool running water that condenses the vapour. The condensed liquid — the <span class="kt">distillate</span> — is collected at the end of the condenser.</p>
+<p class="nh4">Apparatus Components</p>
+<ul class="nl">
+<li><strong>Round-bottomed flask</strong> — contains the mixture; heated by Bunsen burner over wire gauze on tripod</li>
+<li><strong>Boiling chips (anti-bumping granules)</strong> — prevents superheating</li>
+<li><strong>Still head</strong> — connects flask to condenser; holds thermometer</li>
+<li><strong>Thermometer</strong> — bulb positioned at the junction where vapour enters condenser side arm</li>
+<li><strong>Liebig condenser</strong> — inner tube (vapour path) surrounded by outer water jacket</li>
+<li><strong>Conical flask / receiver</strong> — collects the distillate</li>
+</ul>
+<div class="nbox amb"><div class="nl-lbl">⚠️ Critical Detail — Condenser Water Flow</div>
+Water to cool the vapour enters the condenser from the end <strong>closer to the receiver</strong> and leaves from the end close to the distilling flask. This <strong>countercurrent</strong> arrangement ensures the vapour meets the coldest water first — maximising condensation efficiency. Reversing the flow would reduce efficiency.</div>
+<p class="nh3">Industrial Applications (SO 9.7)</p>
+<ul class="nl"><li>Purification of sea water (salts remain, water distils)</li><li>Obtaining distilled spirits (simple, though fractional is preferred)</li><li>Separation of volatile solvents from dissolved solids</li></ul>
+</div></div></div>
+
+<div class="collapsible">
+<div class="coll-hdr" onclick="tc(this)">
+  <div class="coll-title-wrap"><div class="coll-ic" style="background:rgba(16,185,129,.15)">🏭</div>
+  <div><div class="coll-lbl">Fractional Distillation</div><div class="coll-tag">SO 9.1 · 9.6 · 9.7</div></div></div>
+  <span class="coll-arrow">▼</span>
+</div>
+<div class="coll-body"><div class="coll-content">
+<p class="np">Fractional distillation separates <span class="kt">miscible liquids</span> whose components have boiling points <strong>close together</strong> (usually &lt;25°C apart) or are chemically similar, such as ethanol and water.</p>
+<p class="nh3">Key Feature: The Fractionating Column</p>
+<p class="np">A <span class="kt">fractionating column</span> is added between the flask and the condenser. It is a vertical tube packed with inert fragments (glass beads or glass rod) providing a large cool surface for repeated condensation and vaporisation. Once in equilibrium:</p>
+<ul class="nl">
+<li>The column is <strong>hotter at the base</strong> than at the top — a <span class="kt">temperature gradient</span> exists.</li>
+<li>Vapours travel upward and condense at various heights. The condensing liquid is richer in the <strong>more volatile component</strong> at higher positions.</li>
+<li>Most condensed liquid runs back down. Imagine a series of 'condensing traps' — at each trap less volatile component accumulates.</li>
+<li>If the column is long enough, <strong>only the most volatile component</strong> reaches the top and exits to the condenser.</li>
+</ul>
+<div class="nbox"><div class="nl-lbl">💡 Why It Works (SO 9.1)</div>A series of <strong>successive liquid–vapour equilibria</strong> occur up the column. Each equilibrium stage enriches the vapour in the more volatile component. The fractionating column is equivalent to many simple distillations in sequence. <em>The longer the column and the slower the heating, the better the separation.</em></div>
+<p class="nh3">Reading the Boiling Point / Composition Diagram</p>
+<p class="np">For an ideal binary mixture A (lower bp) + B (higher bp), the T-x,y diagram has two curves:</p>
+<ul class="nl">
+<li><strong>Bubble point curve (liquid line)</strong> — shows the boiling point of the liquid at each composition.</li>
+<li><strong>Dew point curve (vapour line)</strong> — shows the composition of the first vapour formed when a liquid of given composition is heated.</li>
+<li>The <strong>vapour is always richer</strong> in the more volatile component (lower bp) than the liquid in equilibrium with it.</li>
+</ul>
+<p class="nh3">Industrial Applications (SO 9.7)</p>
+<ul class="nl">
+<li><strong>Petroleum refinery</strong> — crude oil separated into fractions: LPG, petrol, kerosene, diesel, fuel oil, lubricants, bitumen</li>
+<li><strong>Rum and whisky production</strong> — ethanol concentrated from fermented wash by fractional distillation</li>
+<li><strong>Liquid air separation</strong> — oxygen (bp −183°C) and nitrogen (bp −196°C) obtained</li>
+</ul>
+<div class="nbox amb"><div class="nl-lbl">⚠️ Ethanol–Water Azeotrope Limitation</div>Fractional distillation of ethanol–water can produce a maximum of <strong>95.6% ethanol by mass</strong> (78.2°C). This azeotrope composition cannot be exceeded by distillation. Anhydrous ethanol requires a drying agent (e.g. silica gel, CaO) to remove the remaining water.</div>
+<p class="nh3">Comparison: Simple vs Fractional Distillation (SO 9.6)</p>
+<table class="dtbl">
+<tr><th>Feature</th><th>Simple</th><th>Fractional</th></tr>
+<tr><td>Boiling point difference</td><td>&gt;25°C</td><td>&lt;25°C</td></tr>
+<tr><td>Fractionating column</td><td>No</td><td>Yes (glass beads)</td></tr>
+<tr><td>Purity of distillate</td><td>Lower</td><td>Higher</td></tr>
+<tr><td>Efficiency</td><td>Lower</td><td>Higher (many equilibria)</td></tr>
+<tr><td>Example</td><td>Water from salt</td><td>Ethanol from wine/beer</td></tr>
+</table>
+</div></div></div>
+
+<div class="collapsible">
+<div class="coll-hdr" onclick="tc(this)">
+  <div class="coll-title-wrap"><div class="coll-ic" style="background:rgba(129,140,248,.15)">📊</div>
+  <div><div class="coll-lbl">Raoult's Law &amp; Vapour Pressure</div><div class="coll-tag">SO 9.1</div></div></div>
+  <span class="coll-arrow">▼</span>
+</div>
+<div class="coll-body"><div class="coll-content">
+<p class="nh3">Vapour Pressure of a Pure Liquid</p>
+<p class="np">In a closed container, molecules at the liquid surface with enough kinetic energy escape into the vapour phase, while vapour molecules re-enter the liquid. <strong>Equilibrium</strong> is reached when the rate of evaporation = rate of condensation:</p>
+<span class="formula">liquid ⇌ vapour</span>
+<p class="np">The equilibrium vapour is <span class="kt">saturated</span> and the pressure is the <span class="kt">saturated vapour pressure (SVP)</span> at that temperature. SVP <strong>increases with temperature</strong>. In a mixture, each component exerts its own <span class="kt">partial vapour pressure</span>.</p>
+<p class="nh3">Raoult's Law — Statement (SO 9.1)</p>
+<div class="nbox"><div class="nl-lbl">📜 Raoult's Law</div><em>"The partial vapour pressure of a component in a volatile mixture is equal to the vapour pressure of the pure component at that temperature multiplied by its mole fraction in the mixture."</em><br><small>— François-Marie Raoult (1830–1901)</small></div>
+<span class="formula">P_A = P°_A × x_A</span>
+<span class="formula">P_B = P°_B × x_B</span>
+<span class="formula">P_total = P_A + P_B = (P°_A × x_A) + (P°_B × x_B)</span>
+<p class="nh3">Mole Fraction</p>
+<span class="formula">x_A = n_A / (n_A + n_B)      and      x_A + x_B = 1</span>
+<p class="nh3">Ideal Solutions</p>
+<p class="np">Raoult's law applies only to <span class="kt">ideal solutions</span>. Conditions for ideality:</p>
+<ul class="nl">
+<li>Intermolecular forces A–A = B–B = A–B</li>
+<li>ΔH_mix = 0 (no heat change on mixing)</li>
+<li>ΔV_mix = 0 (no volume change on mixing)</li>
+</ul>
+<div class="two-col">
+<div><p class="nh4">Near-ideal examples (hydrogen bonds):</p><ul class="nl"><li>Water + methanol</li><li>Propan-1-ol + propan-2-ol</li><li>Butan-1-ol + butan-2-ol</li></ul></div>
+<div><p class="nh4">Near-ideal examples (van der Waals):</p><ul class="nl"><li>Hexane + heptane</li><li>Benzene + methylbenzene</li><li>Benzene + toluene</li></ul></div>
+</div>
+<p class="nh3">Mole Fraction in Vapour Phase</p>
+<p class="np">For gases, the mole fraction in the vapour is the ratio of partial pressure to total pressure (Dalton's Law):</p>
+<span class="formula">y_A = P_A / P_total = (P°_A × x_A) / P_total</span>
+<p class="np">Since P°_A &gt; P°_B (A is more volatile), y_A &gt; x_A — the <strong>vapour is always enriched in the more volatile component</strong>.</p>
+<p class="nh3">Reference Data — Vapour Pressures at 25°C</p>
+<table class="dtbl">
+<tr><th>Substance</th><th>bp (°C, 1 atm)</th><th>VP at 25°C (mmHg)</th></tr>
+<tr><td>Water (H₂O)</td><td>100.0</td><td>23.8</td></tr>
+<tr><td>Ethanol (C₂H₅OH)</td><td>78.5</td><td>59.3</td></tr>
+<tr><td>Methanol (CH₃OH)</td><td>64.7</td><td>127.2</td></tr>
+<tr><td>Benzene (C₆H₆)</td><td>80.1</td><td>95.1</td></tr>
+<tr><td>Toluene (C₇H₈)</td><td>110.6</td><td>28.4</td></tr>
+<tr><td>Hexane (C₆H₁₄)</td><td>68.7</td><td>150.6</td></tr>
+<tr><td>Heptane (C₇H₁₆)</td><td>98.4</td><td>45.8</td></tr>
+<tr><td>Acetone (CH₃COCH₃)</td><td>56.1</td><td>231.4</td></tr>
+<tr><td>Chloroform (CHCl₃)</td><td>61.2</td><td>199.0</td></tr>
+</table>
+</div></div></div>
+
+<div class="collapsible">
+<div class="coll-hdr" onclick="tc(this)">
+  <div class="coll-title-wrap"><div class="coll-ic" style="background:rgba(244,63,94,.15)">📈</div>
+  <div><div class="coll-lbl">Deviations from Raoult's Law &amp; Azeotropes</div><div class="coll-tag">SO 9.1</div></div></div>
+  <span class="coll-arrow">▼</span>
+</div>
+<div class="coll-body"><div class="coll-content">
+<p class="np">When two dissimilar liquids mix, the A–A, B–B and A–B intermolecular forces differ. This causes deviation from Raoult's law — such solutions are called <span class="kt">non-ideal solutions</span>.</p>
+<p class="nh3">Positive Deviation</p>
+<p class="np">The actual vapour pressure is <strong>higher</strong> than predicted by Raoult's law.</p>
+<div class="two-col">
+<div class="nbox"><div class="nl-lbl">Cause</div>A–B forces are <strong>weaker</strong> than A–A or B–B. Endothermic mixing. Molecules escape more easily. ΔH_mix &gt; 0, volume expands.</div>
+<div class="nbox amb"><div class="nl-lbl">Examples</div><ul style="margin:0 0 0 16px"><li>Ethanol + water / hexane / CHCl₃</li><li>Methanol + benzene</li><li>Acetone + CS₂</li><li>Ethanol + cyclohexane</li></ul></div>
+</div>
+<p class="np">Large positive deviations → <span class="kt">positive azeotrope</span> (<strong>minimum boiling point</strong>):</p>
+<div class="nbox"><div class="nl-lbl">📌 Ethanol–Water Azeotrope</div><strong>bp = 78.2°C</strong> (below pure ethanol 78.5°C and water 100°C)<br>Composition: <strong>95.6% by mass ethanol</strong> (mole fraction ≈ 0.894)<br>Cannot obtain pure ethanol by distillation alone.</div>
+<p class="nh3">Negative Deviation</p>
+<p class="np">The actual vapour pressure is <strong>lower</strong> than predicted by Raoult's law.</p>
+<div class="two-col">
+<div class="nbox"><div class="nl-lbl">Cause</div>A–B forces are <strong>stronger</strong> than A–A or B–B. Exothermic mixing. Molecules escape less easily. ΔH_mix &lt; 0, volume contracts.</div>
+<div class="nbox rose"><div class="nl-lbl">Examples</div><ul style="margin:0 0 0 16px"><li>Water + HNO₃ or HCl</li><li>Acetone + chloroform</li><li>CHCl₃ + propanone or ethyl ethanoate</li></ul></div>
+</div>
+<p class="np">Large negative deviations → <span class="kt">negative azeotrope</span> (<strong>maximum boiling point</strong>):</p>
+<div class="nbox rose"><div class="nl-lbl">📌 HNO₃–Water Azeotrope</div><strong>bp = 120.5°C</strong> (above pure HNO₃ 86°C and water 100°C)<br>Composition: <strong>68% HNO₃ by mass</strong> (mole fraction ≈ 0.384)</div>
+<p class="nh3">Definition of Azeotrope</p>
+<div class="nbox amb"><div class="nl-lbl">📜 Definition</div>An <span class="kt">azeotrope</span> (constant boiling mixture) is a mixture of two or more liquids in such a ratio that its composition <strong>cannot be changed by distillation</strong>. At the azeotropic composition, the liquid and vapour have the <em>same composition</em>.</div>
+<p class="nh3">Summary Table</p>
+<table class="dtbl">
+<tr><th>Deviation</th><th>VP vs ideal</th><th>BP vs ideal</th><th>Azeotrope type</th><th>Example</th></tr>
+<tr><td>Small positive</td><td>Slightly higher</td><td>Slightly lower</td><td>None</td><td>Ethanol + benzene (small)</td></tr>
+<tr><td>Large positive</td><td>Maximum (hump)</td><td>Minimum (dip)</td><td>Min boiling</td><td>Ethanol + water (78.2°C)</td></tr>
+<tr><td>Small negative</td><td>Slightly lower</td><td>Slightly higher</td><td>None</td><td>CHCl₃ + ether</td></tr>
+<tr><td>Large negative</td><td>Minimum (dip)</td><td>Maximum (hump)</td><td>Max boiling</td><td>HNO₃ + water (120.5°C)</td></tr>
+</table>
+</div></div></div>
+
+<div class="collapsible">
+<div class="coll-hdr" onclick="tc(this)">
+  <div class="coll-title-wrap"><div class="coll-ic" style="background:rgba(129,140,248,.15)">💨</div>
+  <div><div class="coll-lbl">Vacuum Distillation</div><div class="coll-tag">SO 9.2</div></div></div>
+  <span class="coll-arrow">▼</span>
+</div>
+<div class="coll-body"><div class="coll-content">
+<p class="np"><span class="kt">Vacuum distillation</span> is distillation carried out at <strong>reduced pressure</strong> (less than atmospheric). Boiling occurs when the vapour pressure of the liquid just exceeds the external pressure. Lowering external pressure lowers the boiling point.</p>
+<div class="nbox"><div class="nl-lbl">💡 Principle</div>Reduced pressure → lower boiling point → less energy needed → compounds that decompose below their normal bp can now be distilled safely.</div>
+<p class="nh3">Advantages (SO 9.2)</p>
+<ul class="nl">
+<li>Allows distillation of thermally unstable compounds that decompose before their normal boiling point.</li>
+<li>Reduced energy requirements — lower temperatures needed for both heating and cooling.</li>
+<li>Can be carried out with or without heating the mixture.</li>
+<li>Sometimes preferred over steam distillation as it can produce purer product.</li>
+</ul>
+<p class="nh3">Key Examples</p>
+<table class="dtbl">
+<tr><th>Compound</th><th>Normal bp (°C)</th><th>Pressure (atm)</th><th>Reduced bp (°C)</th></tr>
+<tr><td>Phenylamine (aniline)</td><td>184</td><td>0.02</td><td>77</td></tr>
+<tr><td>Dimethyl sulfoxide (DMSO)</td><td>189</td><td>0.1</td><td>85</td></tr>
+<tr><td>Glycerol</td><td>290</td><td>0.05</td><td>167</td></tr>
+</table>
+<div class="nbox amb"><div class="nl-lbl">⚠️ Apparatus Note</div>A <strong>capillary tube</strong> is used in the vacuum distillation apparatus to introduce tiny bubbles into the liquid, preventing 'bumping' — sudden violent boiling that can damage the apparatus or cause injury.</div>
+<p class="nh4">Industrial Application</p>
+<p class="np">In <strong>petroleum refining</strong>, after atmospheric distillation, the heavy residue is processed by vacuum distillation. This extracts lighter, more valuable fractions (e.g. lubricating oils, wax) that would decompose at the temperatures needed to distil them at atmospheric pressure.</p>
+</div></div></div>
+
+<div class="collapsible">
+<div class="coll-hdr" onclick="tc(this)">
+  <div class="coll-title-wrap"><div class="coll-ic" style="background:rgba(0,198,212,.15)">♨️</div>
+  <div><div class="coll-lbl">Steam Distillation</div><div class="coll-tag">SO 9.3</div></div></div>
+  <span class="coll-arrow">▼</span>
+</div>
+<div class="coll-body"><div class="coll-content">
+<p class="np"><span class="kt">Steam distillation</span> purifies temperature-sensitive organic compounds that are <strong>immiscible with water</strong> and would decompose at their normal boiling points.</p>
+<p class="nh3">Principle (SO 9.3)</p>
+<p class="np">When an organic compound immiscible with water is mixed with water and heated, each component <strong>independently exerts its own vapour pressure</strong> as if the other is absent:</p>
+<span class="formula">P_total = P°_water + P°_organic</span>
+<p class="np">This total exceeds atmospheric pressure at a temperature <strong>below 100°C</strong> — the mixture boils lower than either pure component.</p>
+<div class="two-col">
+<div class="nbox"><div class="nl-lbl">📌 Bromobenzene</div>Normal bp = 156°C. With water: distils at <strong>~95°C</strong>. Decomposition prevented.</div>
+<div class="nbox"><div class="nl-lbl">📌 Phenylamine</div>Normal bp = 184°C. With water: distils at <strong>98°C</strong>. Industrial purification method.</div>
+</div>
+<div class="nbox"><div class="nl-lbl">📌 Nitrobenzene</div>Normal bp = 211°C. With water (VP_water = 733 mmHg at 99°C): distils at <strong>99°C</strong>. P_NB = 760 − 733 = 27 mmHg.</div>
+<p class="nh3">Steam Distillation Calculations (SO 9.3)</p>
+<p class="np">Since each component is independent:</p>
+<span class="formula">P_water / P_A = n_water / n_A</span>
+<span class="formula">P_water / P_A = (m_water / M_water) / (m_A / M_A)</span>
+<p class="nh3">Applications (SO 9.7)</p>
+<ul class="nl">
+<li><strong>Essential oils</strong> from plant materials — eugenol from cloves, eucalyptus oil, citrus oils from lemon/orange peel, oils in perfumes from various plants.</li>
+<li>Purification of <strong>nitrobenzene</strong> (bp 211°C → 99°C with steam)</li>
+<li>Purification of <strong>phenylamine/aniline</strong> (bp 184°C → 98°C)</li>
+<li><strong>Fragrance industry</strong> (SO 9.7: include perfume, rum, petroleum)</li>
+</ul>
+<div class="nbox amb"><div class="nl-lbl">⚠️ Advantages vs Disadvantages</div>
+<div class="two-col" style="margin-top:5px">
+<div><strong style="color:var(--emerald)">Advantages</strong><ul style="margin:3px 0 0 15px;font-size:.87rem"><li>Below 100°C → no decomposition</li><li>Cheap, readily available steam</li><li>No organic solvent needed</li><li>Can be combined with vacuum distillation (e.g. bromobenzene at 61°C)</li></ul></div>
+<div><strong style="color:var(--rose)">Disadvantages</strong><ul style="margin:3px 0 0 15px;font-size:.87rem"><li>Only works for immiscible liquids</li><li>Distillate forms two layers (needs separating funnel)</li><li>Large volumes of water produced</li><li>Not suitable for water-miscible compounds</li></ul></div>
+</div></div>
+<p class="nh3">Laboratory Procedure</p>
+<ol style="margin:7px 0 0 18px;line-height:2;font-size:.9rem">
+<li>Generate steam in a separate steam generator flask</li>
+<li>Pass steam through the organic mixture in a second flask</li>
+<li>Mixed vapour (steam + organic) passes through the condenser</li>
+<li>Condensate forms two layers in receiver: water layer + organic layer</li>
+<li>Separate layers using a separating funnel</li>
+<li>Dry organic layer with anhydrous MgSO₄; filter; distil off solvent</li>
+</ol>
+</div></div></div>
+
+<div class="collapsible">
+<div class="coll-hdr" onclick="tc(this)">
+  <div class="coll-title-wrap"><div class="coll-ic" style="background:rgba(16,185,129,.15)">⚗️</div>
+  <div><div class="coll-lbl">Solvent Extraction &amp; Partition Law</div><div class="coll-tag">SO 9.4 · 9.5</div></div></div>
+  <span class="coll-arrow">▼</span>
+</div>
+<div class="coll-body"><div class="coll-content">
+<p class="np"><span class="kt">Solvent extraction</span> separates compounds based on their preferential solubilities in two immiscible liquids (usually water and an organic solvent). The solute transfers from the phase in which it is less soluble to the phase in which it is more soluble.</p>
+<p class="nh3">The Partition Law (SO 9.4)</p>
+<div class="nbox"><div class="nl-lbl">📜 Partition Law</div>When a solute distributes itself between two immiscible solvents at equilibrium and constant temperature, the ratio of its concentrations in the two solvents is a constant — the <span class="kt">partition coefficient (K_d or K_p)</span>.</div>
+<span class="formula">K_d = [solute]_organic / [solute]_aqueous = constant (at fixed T)</span>
+<p class="np">The partition coefficient depends on the nature of both the solute and the two solvents. A large K_d means the solute prefers the organic phase.</p>
+<div class="nbox em"><div class="nl-lbl">💡 Multiple Extractions — More Efficient</div>Using the same total volume of solvent in <strong>multiple small extractions</strong> removes more solute than a single large extraction. Each fresh solvent maintains a large concentration gradient, driving more solute across the interface.</div>
+<p class="nh3">Common Organic Solvents</p>
+<table class="dtbl">
+<tr><th>Solvent</th><th>Advantage</th></tr>
+<tr><td>Diethyl ether</td><td>Low bp (34.6°C) — easily distilled off and recycled; most widely used</td></tr>
+<tr><td>Trichloromethane</td><td>Good for polar organic compounds</td></tr>
+<tr><td>Ethyl acetate</td><td>Lower toxicity</td></tr>
+<tr><td>Dichloromethane</td><td>Good for non-polar to moderately polar compounds</td></tr>
+</table>
+<p class="nh3">Laboratory Procedure — Separating Funnel</p>
+<ol style="margin:7px 0 0 18px;line-height:2;font-size:.9rem">
+<li>Add crude organic product (aqueous) + organic solvent to separating funnel. Shake; periodically open tap to release vapour pressure.</li>
+<li>Allow to stand → two distinct layers form → drain layers separately. The organic layer (the <strong>extract</strong>) is kept.</li>
+<li>Repeat extraction with fresh solvent at least twice. Combine all organic extracts.</li>
+<li>Dry with anhydrous ionic salt (e.g. MgSO₄, Na₂SO₄) — takes several hours. Filter off the hydrated salt.</li>
+<li>Distil off the organic solvent to recover the pure solid/liquid product.</li>
+</ol>
+<p class="nh3">Selecting the Correct Method (SO 9.5)</p>
+<table class="dtbl">
+<tr><th>Situation</th><th>Best Method</th></tr>
+<tr><td>Miscible liquids, bp difference &gt;25°C</td><td>Simple distillation</td></tr>
+<tr><td>Miscible liquids, similar bp</td><td>Fractional distillation</td></tr>
+<tr><td>High bp liquid or thermally sensitive</td><td>Vacuum or steam distillation</td></tr>
+<tr><td>Organic compound immiscible with water (high bp)</td><td>Steam distillation + separating funnel</td></tr>
+<tr><td>Organic product in aqueous solution</td><td>Solvent extraction (separating funnel)</td></tr>
+<tr><td>Two immiscible liquids (density difference)</td><td>Separating funnel only</td></tr>
+</table>
+</div></div></div>
+
+</div><!-- end collapsible-group -->
+</div><!-- end panel-notes -->
+<!-- ===== SIMULATIONS ===== -->
+<div class="tab-panel" id="panel-sim">
+<h2 class="section-title">Interactive Simulations</h2>
+<p class="section-subtitle">Explore phase separation concepts through interactive charts, animated apparatus, and live calculations.</p>
+<div class="sim-nav">
+  <button class="sbtn active" onclick="switchSim('raoul')" id="sbtn-raoul">📊 Raoult's Law</button>
+  <button class="sbtn" onclick="switchSim('apparatus')" id="sbtn-apparatus">🔬 Distillation Apparatus</button>
+  <button class="sbtn" onclick="switchSim('azeo')" id="sbtn-azeo">🌀 Azeotropes</button>
+  <button class="sbtn" onclick="switchSim('steam')" id="sbtn-steam">♨️ Steam Distillation</button>
+</div>
+
+<!-- SIM 1: RAOULT'S LAW -->
+<div class="sim-panel active" id="sim-raoul">
+<div class="chart-cont">
+  <div class="chart-hdr">
+    <div><div class="chart-ttl">Raoult's Law — Vapour-Liquid Equilibrium</div><div class="chart-sub">Partial &amp; total pressures vs composition for binary mixtures</div></div>
+    <div class="ctrls">
+      <select class="ctrl-sel" id="rl-mix" onchange="updateRaoulChart()">
+        <option value="benz-tol">Benzene–Toluene (ideal)</option>
+        <option value="hex-hep">Hexane–Heptane (ideal)</option>
+        <option value="eth-water">Ethanol–Water (+ve deviation)</option>
+        <option value="acet-chcl3">Acetone–CHCl₃ (−ve deviation)</option>
+      </select>
+      <div class="tog-grp">
+        <button class="tog-btn active" id="togPx" onclick="setRaoulMode('px')">P-x-y</button>
+        <button class="tog-btn" id="togTx" onclick="setRaoulMode('tx')">T-x-y</button>
+      </div>
+    </div>
+  </div>
+  <div class="chart-wrap"><canvas id="chartRaoul"></canvas></div>
+  <div class="leg">
+    <span class="leg-item"><span class="leg-line" style="background:#00c6d4"></span>Liquid line (bubble point)</span>
+    <span class="leg-item"><span class="leg-line" style="background:#f59e0b"></span>Vapour line (dew point)</span>
+    <span class="leg-item"><span class="leg-line" style="background:rgba(129,140,248,.6);border-top:2px dashed #818cf8"></span>Ideal (Raoult)</span>
+  </div>
+</div>
+<div style="background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:22px;margin-top:18px">
+  <div class="chart-ttl" style="margin-bottom:16px">🧮 Live Calculator</div>
+  <div class="sl-row"><span class="sl-lbl">Mole fraction x<sub>A</sub>:</span><input type="range" id="rl-xa" min="0" max="1" step="0.01" value="0.5" oninput="updateRaoulCalc()"><span class="sl-val" id="rl-xa-v">0.50</span></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:14px" id="rl-results">
+    <div style="background:var(--surface2);border-radius:9px;padding:12px;text-align:center"><div style="font-size:.73rem;color:var(--text2);margin-bottom:4px">P<sub>A</sub> (partial)</div><div style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;color:var(--primary)" id="rl-pa">—</div></div>
+    <div style="background:var(--surface2);border-radius:9px;padding:12px;text-align:center"><div style="font-size:.73rem;color:var(--text2);margin-bottom:4px">P<sub>B</sub> (partial)</div><div style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;color:var(--amber)" id="rl-pb">—</div></div>
+    <div style="background:var(--surface2);border-radius:9px;padding:12px;text-align:center"><div style="font-size:.73rem;color:var(--text2);margin-bottom:4px">P<sub>total</sub></div><div style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;color:var(--violet)" id="rl-pt">—</div></div>
+    <div style="background:var(--surface2);border-radius:9px;padding:12px;text-align:center"><div style="font-size:.73rem;color:var(--text2);margin-bottom:4px">y<sub>A</sub> (vapour)</div><div style="font-family:'JetBrains Mono',monospace;font-size:1.1rem;color:var(--emerald)" id="rl-ya">—</div></div>
+  </div>
+  <div style="margin-top:14px;padding:12px;background:var(--surface3);border-radius:9px;font-size:.81rem;color:var(--text2)" id="rl-formula-disp"></div>
+  <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+    <button class="rec-btn" onclick="recordRaoul()">+ Record Point</button>
+    <button class="clr-btn" onclick="clearRaoulData()">Clear</button>
+    <button class="exp-btn" onclick="exportCSV('raoulData','raoul_data.csv')">⬇ Export CSV</button>
+  </div>
+</div>
+<div class="data-sec">
+  <div class="data-sec-hdr"><h3>Recorded Data</h3></div>
+  <div style="overflow-x:auto"><table class="sdt" id="raoulTable"><tr class="tbl-header"><th>x_A</th><th>P_A (mmHg)</th><th>P_B (mmHg)</th><th>P_total (mmHg)</th><th>y_A</th></tr><tr><td colspan="5" class="tbl-empty">No data recorded yet.</td></tr></table></div>
+</div>
+</div>
+
+<!-- SIM 2: DISTILLATION APPARATUS -->
+<div class="sim-panel" id="sim-apparatus">
+<div class="app-grid">
+  <div>
+    <div class="canvas-wrap">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;flex-wrap:wrap;gap:8px">
+        <div style="font-family:'Lora',serif;font-size:.95rem;font-weight:600;color:#fff" id="app-title">Simple Distillation Apparatus</div>
+        <div class="tog-grp">
+          <button class="tog-btn active" id="tog-simple" onclick="setApparatus('simple')">Simple</button>
+          <button class="tog-btn" id="tog-frac" onclick="setApparatus('fractional')">Fractional</button>
+        </div>
+      </div>
+      <canvas id="appCanvas" width="640" height="420"></canvas>
+    </div>
+    <div class="data-sec" style="margin-top:14px">
+      <div class="data-sec-hdr"><h3>Distillation Log</h3><button class="exp-btn" onclick="exportCSV('distData','distillation_log.csv')">⬇ Export CSV</button></div>
+      <div style="overflow-x:auto"><table class="sdt" id="distTable"><tr><th>Time (s)</th><th>Flask Temp (°C)</th><th>Vapour Temp (°C)</th><th>Distillate (mL)</th><th>EtOH%</th></tr><tr><td colspan="5" class="tbl-empty">Start distillation to record data.</td></tr></table></div>
+    </div>
+  </div>
+  <div class="app-ctrl">
+    <h3>Controls</h3>
+    <div class="ctrl-row"><label>Mixture</label>
+      <select class="ctrl-sel" id="app-mix" style="width:100%" onchange="resetDistillation()">
+        <option value="beer">Beer (5% EtOH)</option>
+        <option value="wine">Wine (12% EtOH)</option>
+        <option value="rum">Rum wash (40% EtOH)</option>
+        <option value="benzene-toluene">Benzene–Toluene</option>
+        <option value="water-salt">Salt solution</option>
+      </select>
+    </div>
+    <div class="ctrl-row"><label>Heat Intensity</label>
+      <div class="sl-row" style="margin:4px 0 0"><input type="range" id="app-heat" min="0" max="100" value="50"><span class="sl-val" id="heat-v">50%</span></div>
+    </div>
+    <div class="ctrl-row" style="display:flex;gap:7px;margin-top:14px">
+      <button class="big-btn" id="dist-start-btn" onclick="toggleDistillation()">▶ Start</button>
+      <button class="big-btn" style="background:var(--surface3);border:1px solid var(--border);color:var(--text2)" onclick="resetDistillation()">↺ Reset</button>
+    </div>
+    <div class="info-panel" style="margin-top:12px">
+      <div class="inf-ttl">Live Readings <span class="sbadge badge-stop" id="dist-badge">STOPPED</span></div>
+      <table style="width:100%;font-size:.82rem;margin-top:8px">
+        <tr><td style="color:var(--text2)">Flask Temp</td><td style="font-family:'JetBrains Mono',monospace;color:var(--amber);text-align:right" id="d-flask-t">25.0°C</td></tr>
+        <tr><td style="color:var(--text2)">Vapour Temp</td><td style="font-family:'JetBrains Mono',monospace;color:var(--primary);text-align:right" id="d-vap-t">25.0°C</td></tr>
+        <tr><td style="color:var(--text2)">Distillate</td><td style="font-family:'JetBrains Mono',monospace;color:var(--emerald);text-align:right" id="d-dist-v">0.0 mL</td></tr>
+        <tr><td style="color:var(--text2)">Ethanol %</td><td style="font-family:'JetBrains Mono',monospace;color:var(--violet);text-align:right" id="d-etoh">—</td></tr>
+      </table>
+    </div>
+    <div class="info-panel" id="app-note" style="margin-top:10px">
+      <div class="inf-ttl">🔬 Observation</div>
+      <div id="app-note-txt" style="margin-top:5px;font-size:.8rem">Select a mixture and press Start to begin.</div>
+    </div>
+    <button class="rec-btn" style="margin-top:10px;width:100%" onclick="recordDist()">+ Record Reading</button>
+  </div>
+</div>
+</div>
+
+<!-- SIM 3: AZEOTROPES -->
+<div class="sim-panel" id="sim-azeo">
+<div class="azeo-grid">
+  <div class="chart-cont">
+    <div class="chart-hdr"><div><div class="chart-ttl" style="color:var(--rose)">Positive Azeotrope</div><div class="chart-sub">Ethanol–Water · min bp = 78.2°C at x = 0.894</div></div></div>
+    <div class="chart-wrap"><canvas id="chartAzeoPos"></canvas></div>
+    <div class="leg"><span class="leg-item"><span class="leg-dot" style="background:var(--primary)"></span>Bubble point</span><span class="leg-item"><span class="leg-dot" style="background:var(--amber)"></span>Dew point</span><span class="leg-item"><span class="leg-dot" style="background:var(--rose)"></span>Azeotrope</span></div>
+  </div>
+  <div class="chart-cont">
+    <div class="chart-hdr"><div><div class="chart-ttl" style="color:var(--violet)">Negative Azeotrope</div><div class="chart-sub">HNO₃–Water · max bp = 120.5°C at x = 0.384</div></div></div>
+    <div class="chart-wrap"><canvas id="chartAzeoNeg"></canvas></div>
+    <div class="leg"><span class="leg-item"><span class="leg-dot" style="background:var(--primary)"></span>Bubble point</span><span class="leg-item"><span class="leg-dot" style="background:var(--amber)"></span>Dew point</span><span class="leg-item"><span class="leg-dot" style="background:var(--violet)"></span>Azeotrope</span></div>
+  </div>
+</div>
+<div class="chart-cont" style="margin-top:18px">
+  <div class="chart-hdr">
+    <div><div class="chart-ttl" style="color:var(--emerald)">Ideal Mixture — Fractional Distillation Path</div><div class="chart-sub">Benzene–Toluene · trace how fractional distillation enriches the more volatile component</div></div>
+    <div class="ctrls">
+      <span style="font-size:.8rem;color:var(--text2)">Starting x<sub>benz</sub>:</span>
+      <input type="range" id="az-start" min="0.05" max="0.95" step="0.05" value="0.3" oninput="updateAzeoPath()">
+      <span class="sl-val" id="az-start-v" style="font-family:'JetBrains Mono',monospace;font-size:.8rem;color:var(--emerald)">0.30</span>
+    </div>
+  </div>
+  <div class="chart-wrap"><canvas id="chartAzeoIdeal"></canvas></div>
+  <div id="azeo-path-explain" style="margin-top:12px;padding:12px;background:var(--surface2);border-radius:9px;font-size:.83rem;color:var(--text2);line-height:1.65"></div>
+</div>
+</div>
+
+<!-- SIM 4: STEAM DISTILLATION -->
+<div class="sim-panel" id="sim-steam">
+<div class="app-grid">
+  <div>
+    <div class="canvas-wrap">
+      <div style="font-family:'Lora',serif;font-size:.95rem;font-weight:600;color:#fff;margin-bottom:10px">Steam Distillation Apparatus</div>
+      <canvas id="steamCanvas" width="640" height="420"></canvas>
+    </div>
+  </div>
+  <div class="app-ctrl">
+    <h3>Controls</h3>
+    <div class="ctrl-row"><label>Organic Compound</label>
+      <select class="ctrl-sel" id="steam-comp" style="width:100%" onchange="updateSteamCalc()">
+        <option value="nitrobenzene">Nitrobenzene (M=123, bp=211°C)</option>
+        <option value="phenylamine">Phenylamine/Aniline (M=93, bp=184°C)</option>
+        <option value="bromobenzene">Bromobenzene (M=157, bp=156°C)</option>
+        <option value="eugenol">Eugenol (M=164, bp=255°C)</option>
+      </select>
+    </div>
+    <div class="ctrl-row"><label>Steam Pressure</label>
+      <div class="sl-row" style="margin:4px 0 0"><input type="range" id="steam-pres" min="80" max="120" value="101.3" step="0.5" oninput="updateSteamCalc()"><span class="sl-val" id="steam-pres-v">101 kPa</span></div>
+    </div>
+    <div style="display:flex;gap:7px;margin-top:14px">
+      <button class="big-btn" id="steam-start-btn" onclick="toggleSteam()">▶ Start Steam</button>
+      <button class="big-btn" style="background:var(--surface3);border:1px solid var(--border);color:var(--text2)" onclick="resetSteam()">↺ Reset</button>
+    </div>
+    <div class="info-panel" style="margin-top:12px">
+      <div class="inf-ttl">Calculated Results</div>
+      <table style="width:100%;font-size:.82rem;margin-top:8px">
+        <tr><td style="color:var(--text2)">Distillation Temp</td><td style="font-family:'JetBrains Mono',monospace;color:var(--amber);text-align:right" id="st-temp">—</td></tr>
+        <tr><td style="color:var(--text2)">P°_water</td><td style="font-family:'JetBrains Mono',monospace;color:var(--primary);text-align:right" id="st-pw">—</td></tr>
+        <tr><td style="color:var(--text2)">P°_organic</td><td style="font-family:'JetBrains Mono',monospace;color:var(--violet);text-align:right" id="st-po">—</td></tr>
+        <tr><td style="color:var(--text2)">Mole ratio (water/org)</td><td style="font-family:'JetBrains Mono',monospace;color:var(--emerald);text-align:right" id="st-mr">—</td></tr>
+        <tr><td style="color:var(--text2)">Mass % organic</td><td style="font-family:'JetBrains Mono',monospace;color:var(--rose);text-align:right" id="st-mp">—</td></tr>
+      </table>
+    </div>
+    <div class="info-panel" id="steam-explain" style="margin-top:10px">
+      <div class="inf-ttl">📌 How It Works</div>
+      <div id="steam-txt" style="margin-top:5px;font-size:.8rem;line-height:1.65"></div>
+    </div>
+    <div style="display:flex;gap:7px;margin-top:10px;flex-wrap:wrap">
+      <button class="rec-btn" onclick="recordSteam()">+ Record</button>
+      <button class="clr-btn" onclick="clearSteamData()">Clear</button>
+      <button class="exp-btn" onclick="exportCSV('steamData','steam_dist_data.csv')">⬇ Export</button>
+    </div>
+  </div>
+</div>
+<div class="data-sec" style="margin-top:14px">
+  <div class="data-sec-hdr"><h3>Steam Distillation Data</h3></div>
+  <div style="overflow-x:auto"><table class="sdt" id="steamTable"><tr><th>Compound</th><th>P_total (kPa)</th><th>T_dist (°C)</th><th>P_water (mmHg)</th><th>P_org (mmHg)</th><th>Mass% org</th></tr><tr><td colspan="6" class="tbl-empty">No data recorded yet.</td></tr></table></div>
+</div>
+</div>
+
+</div><!-- end panel-sim -->
+<!-- ===== WORKED EXAMPLES ===== -->
+<div class="tab-panel" id="panel-examples">
+<h2 class="section-title">Worked Examples</h2>
+<p class="section-subtitle">Step-by-step solutions to CAPE-style questions. Click to expand each example.</p>
+<div class="ex-grid">
+
+<div class="ex-card">
+<div class="ex-hdr" onclick="toggleEx(this)">
+  <div class="ex-num">1</div>
+  <div class="ex-meta"><div class="ex-title">Raoult's Law — Partial &amp; Total Vapour Pressure</div><div class="ex-topic">Raoult's Law · Ideal Solution</div></div>
+  <span class="coll-arrow">▼</span>
+</div>
+<div class="ex-body"><div class="ex-content">
+<p style="color:var(--text2);margin-bottom:14px;font-size:.9rem"><em>At 25°C, the vapour pressure of pure benzene is 95.1 mmHg and that of pure toluene is 28.4 mmHg. Calculate the partial vapour pressures, total vapour pressure, and mole fraction of benzene in the vapour above a mixture containing a mole fraction of benzene x = 0.60.</em></p>
+<div class="step"><div class="step-num">Step 1 — Identify known quantities</div><div class="step-txt">
+  P°<sub>benzene</sub> = 95.1 mmHg, P°<sub>toluene</sub> = 28.4 mmHg, x<sub>benzene</sub> = 0.60<br>
+  ∴ x<sub>toluene</sub> = 1 − 0.60 = <strong>0.40</strong>
+</div></div>
+<div class="step amb"><div class="step-num">Step 2 — Apply Raoult's Law to each component</div><div class="step-txt">
+  <span class="mline">P_benz = P°_benz × x_benz = 95.1 × 0.60 = 57.1 mmHg</span>
+  <span class="mline">P_tol = P°_tol × x_tol = 28.4 × 0.40 = 11.4 mmHg</span>
+</div></div>
+<div class="step"><div class="step-num">Step 3 — Total vapour pressure (Dalton's Law)</div><div class="step-txt">
+  <span class="mline">P_total = P_benz + P_tol = 57.1 + 11.4 = 68.5 mmHg</span>
+</div></div>
+<div class="step amb"><div class="step-num">Step 4 — Mole fraction in vapour phase</div><div class="step-txt">
+  <span class="mline">y_benz = P_benz / P_total = 57.1 / 68.5 = 0.834</span>
+  Notice: y_benz (0.834) &gt; x_benz (0.60) — the vapour is <strong>enriched in benzene</strong> (the more volatile component). This is the basis of fractional distillation.
+</div></div>
+<div class="ans-box">✓ Answers: P_benz = 57.1 mmHg · P_tol = 11.4 mmHg · P_total = 68.5 mmHg · y_benz = 0.834</div>
+</div></div></div>
+
+<div class="ex-card">
+<div class="ex-hdr" onclick="toggleEx(this)">
+  <div class="ex-num">2</div>
+  <div class="ex-meta"><div class="ex-title">Steam Distillation — Molar Mass of Nitrobenzene</div><div class="ex-topic">Steam Distillation · Molar Mass Calculation</div></div>
+  <span class="coll-arrow">▼</span>
+</div>
+<div class="ex-body"><div class="ex-content">
+<p style="color:var(--text2);margin-bottom:14px;font-size:.9rem"><em>A mixture of nitrobenzene and water distils at 99°C under atmospheric pressure (760 mmHg). The vapour pressure of water at 99°C is 733 mmHg. The distillate contains 40 g of water and 10 g of nitrobenzene. Calculate the molar mass of nitrobenzene.</em></p>
+<div class="step"><div class="step-num">Step 1 — Find partial pressure of nitrobenzene</div><div class="step-txt">
+  <span class="mline">P_NB = P_total − P_water = 760 − 733 = 27 mmHg</span>
+</div></div>
+<div class="step amb"><div class="step-num">Step 2 — Set up the molar mass ratio</div><div class="step-txt">
+  For steam distillation of immiscible liquids, partial pressures equal molar ratios:
+  <span class="mline">P_water / P_NB = n_water / n_NB = (m_water/M_water) / (m_NB/M_NB)</span>
+  <span class="mline">733 / 27 = (40/18) / (10/M_NB)</span>
+</div></div>
+<div class="step"><div class="step-num">Step 3 — Solve for M_NB</div><div class="step-txt">
+  <span class="mline">27.15 = (2.222) / (10/M_NB)</span>
+  <span class="mline">10/M_NB = 2.222 / 27.15 = 0.08185</span>
+  <span class="mline">M_NB = 10 / 0.08185 = 122.2 g mol⁻¹</span>
+</div></div>
+<div class="ans-box">✓ Molar mass of nitrobenzene ≈ 122 g mol⁻¹ (actual: 123.1 g mol⁻¹ — close agreement)</div>
+</div></div></div>
+
+<div class="ex-card">
+<div class="ex-hdr" onclick="toggleEx(this)">
+  <div class="ex-num">3</div>
+  <div class="ex-meta"><div class="ex-title">Steam Distillation — Mass of Phenylamine Obtained</div><div class="ex-topic">Steam Distillation · SG Textbook Worked Example 2</div></div>
+  <span class="coll-arrow">▼</span>
+</div>
+<div class="ex-body"><div class="ex-content">
+<p style="color:var(--text2);margin-bottom:14px;font-size:.9rem"><em>A mixture of phenylamine (M = 93 g mol⁻¹) and water distils at 98°C. At 98°C, P°_water = 707 mmHg and P_total = 760 mmHg. The distillate contains 25 g of water. Calculate the mass of phenylamine in the distillate.</em></p>
+<div class="step"><div class="step-num">Step 1 — Find partial pressure of phenylamine</div><div class="step-txt">
+  <span class="mline">P_PA = 760 − 707 = 53 mmHg</span>
+</div></div>
+<div class="step amb"><div class="step-num">Step 2 — Apply mole ratio equation</div><div class="step-txt">
+  <span class="mline">P_water / P_PA = n_water / n_PA</span>
+  <span class="mline">707 / 53 = (25/18) / (m_PA/93)</span>
+  <span class="mline">13.34 = 1.389 / (m_PA/93)</span>
+</div></div>
+<div class="step"><div class="step-num">Step 3 — Solve for mass of phenylamine</div><div class="step-txt">
+  <span class="mline">m_PA/93 = 1.389 / 13.34 = 0.1041</span>
+  <span class="mline">m_PA = 0.1041 × 93 = 9.68 g ≈ 9.7 g</span>
+</div></div>
+<div class="ans-box">✓ Mass of phenylamine = 9.7 g (per 25 g water in distillate)</div>
+</div></div></div>
+
+<div class="ex-card">
+<div class="ex-hdr" onclick="toggleEx(this)">
+  <div class="ex-num">4</div>
+  <div class="ex-meta"><div class="ex-title">Ethanol–Water Azeotrope Analysis</div><div class="ex-topic">Azeotropes · Fractional Distillation · CE Q1(c)(d)</div></div>
+  <span class="coll-arrow">▼</span>
+</div>
+<div class="ex-body"><div class="ex-content">
+<p style="color:var(--text2);margin-bottom:14px;font-size:.9rem"><em>(c) What is an azeotrope? (d) Explain why the fractional distillation of a mixture of ethanol and water can only produce a maximum of approximately 96% ethanol by mass and not pure ethanol.</em></p>
+<div class="step"><div class="step-num">Part (c) — Definition of Azeotrope</div><div class="step-txt">
+  An <strong>azeotrope</strong> (constant boiling mixture) is a mixture of two or more liquids in such a ratio that its composition cannot be changed by distillation. At the azeotropic composition, the liquid and vapour phases have the <em>same</em> composition.
+</div></div>
+<div class="step amb"><div class="step-num">Part (d) — Why 96% is the maximum</div><div class="step-txt">
+  Ethanol–water shows a <strong>positive deviation</strong> from Raoult's Law: the actual vapour pressure exceeds the ideal. This creates a <strong>minimum boiling azeotrope at 78.2°C</strong> with a composition of 95.6% ethanol by mass (mole fraction ≈ 0.894).<br><br>
+  On the T-x,y diagram, as distillation proceeds from a dilute ethanol mixture, the vapour successively becomes richer in ethanol. However, once the azeotrope composition is reached, the <strong>liquid and vapour lines meet</strong>. The vapour at this point has the same composition as the liquid — no further enrichment can occur by distillation alone. Any distillate beyond this point would carry over both ethanol and water in the fixed azeotrope ratio.
+</div></div>
+<div class="step em"><div class="step-num">Additional Detail — How to Get Anhydrous Ethanol</div><div class="step-txt">
+  To obtain 100% ethanol, the water must be removed by a chemical drying agent:<br>
+  • Calcium oxide (CaO/quicklime) — reacts with water: CaO + H₂O → Ca(OH)₂<br>
+  • Anhydrous copper(II) sulfate, silica gel, or molecular sieves<br>
+  Then the anhydrous ethanol is distilled off from the drying agent.
+</div></div>
+<div class="ans-box">✓ The ethanol–water system forms a minimum-boiling azeotrope (78.2°C, 95.6% EtOH). At this composition the liquid and vapour are identical, so distillation cannot produce further enrichment.</div>
+</div></div></div>
+
+<div class="ex-card">
+<div class="ex-hdr" onclick="toggleEx(this)">
+  <div class="ex-num">5</div>
+  <div class="ex-meta"><div class="ex-title">Partition Coefficient — Single vs Multiple Extractions</div><div class="ex-topic">Solvent Extraction · Partition Law · CE Q</div></div>
+  <span class="coll-arrow">▼</span>
+</div>
+<div class="ex-body"><div class="ex-content">
+<p style="color:var(--text2);margin-bottom:14px;font-size:.9rem"><em>A compound X has K_d = 5.0 (ether/water). 0.60 g of X is dissolved in 60 cm³ of water. (a) Calculate the mass extracted in a single extraction using 60 cm³ of ether. (b) Calculate the total mass extracted using TWO extractions each with 30 cm³ ether. (c) State which procedure is more efficient.</em></p>
+<div class="step"><div class="step-num">Part (a) — Single extraction: 60 cm³ ether</div><div class="step-txt">
+  Let mass extracted = m grams. Mass remaining in water = (0.60 − m) g.
+  <span class="mline">K_d = [X]_ether / [X]_water = (m/60) / ((0.60−m)/60) = 5.0</span>
+  <span class="mline">m / (0.60 − m) = 5.0</span>
+  <span class="mline">m = 3.0 − 5m  →  6m = 3.0  →  m = 0.50 g</span>
+  <strong>Mass extracted = 0.50 g (83.3%)</strong>
+</div></div>
+<div class="step amb"><div class="step-num">Part (b) — First extraction: 30 cm³ ether</div><div class="step-txt">
+  Let mass extracted in 1st extraction = m₁.
+  <span class="mline">K_d = (m₁/30) / ((0.60−m₁)/60) = 5.0</span>
+  <span class="mline">m₁ × 60 / (30 × (0.60−m₁)) = 5.0</span>
+  <span class="mline">2m₁ / (0.60−m₁) = 5.0</span>
+  <span class="mline">2m₁ = 3.0 − 5m₁  →  7m₁ = 3.0  →  m₁ = 0.4286 g</span>
+  Remaining in water = 0.60 − 0.4286 = 0.1714 g
+</div></div>
+<div class="step"><div class="step-num">Part (b) — Second extraction: 30 cm³ ether on remaining 0.1714 g</div><div class="step-txt">
+  <span class="mline">2m₂ / (0.1714−m₂) = 5.0</span>
+  <span class="mline">2m₂ = 0.857 − 5m₂  →  7m₂ = 0.857  →  m₂ = 0.1224 g</span>
+  Total extracted = 0.4286 + 0.1224 = <strong>0.5510 g (91.8%)</strong>
+</div></div>
+<div class="ans-box">✓ (a) 0.50 g (83.3%) vs (b) 0.55 g (91.8%) — <strong>multiple small extractions are more efficient</strong>. Each fresh solvent restores a maximum concentration gradient, pulling more solute across the interface.</div>
+</div></div></div>
+
+<div class="ex-card">
+<div class="ex-hdr" onclick="toggleEx(this)">
+  <div class="ex-num">6</div>
+  <div class="ex-meta"><div class="ex-title">Reading a BP–Composition Diagram</div><div class="ex-topic">Fractional Distillation · T-x,y Diagram · CE Q2(b)(c)</div></div>
+  <span class="coll-arrow">▼</span>
+</div>
+<div class="ex-body"><div class="ex-content">
+<p style="color:var(--text2);margin-bottom:14px;font-size:.9rem"><em>A boiling point–composition diagram for benzene–toluene at 1 atm shows: pure benzene bp = 80.1°C, pure toluene bp = 110.6°C. (b) At 95°C, read the liquid composition (x_benz) and vapour composition (y_benz). (c) Explain how fractional distillation enriches the vapour in benzene.</em></p>
+<div class="step"><div class="step-num">Part (b) — Reading the diagram at 95°C</div><div class="step-txt">
+  Draw a horizontal tie-line at T = 95°C across the two-phase region:<br>
+  • The intersection with the <strong>liquid (bubble point) curve</strong> gives: <span class="mline">x_benz ≈ 0.41</span>
+  • The intersection with the <strong>vapour (dew point) curve</strong> gives: <span class="mline">y_benz ≈ 0.63</span>
+  Note: y_benz &gt; x_benz — confirming the vapour is richer in benzene (more volatile).
+</div></div>
+<div class="step amb"><div class="step-num">Part (c) — Mechanism of enrichment</div><div class="step-txt">
+  Starting from a mixture with x_benz = 0.41:<br>
+  1. Heat to 95°C → first vapour formed has y_benz ≈ 0.63 (richer in benzene).<br>
+  2. This vapour rises up the fractionating column and condenses. The condensate (x ≈ 0.63) is now richer in benzene.<br>
+  3. This new liquid is re-heated → vapour with even higher y_benz forms. A new tie-line at a lower temperature can be drawn.<br>
+  4. The process repeats at each 'theoretical plate' up the column.<br>
+  5. After many such equilibria, vapour of almost pure benzene (x → 1, bp → 80.1°C) reaches the top and exits.<br><br>
+  <em>The fractionating column acts as many sequential simple distillations — each step enriches the vapour further in the more volatile component.</em>
+</div></div>
+<div class="ans-box">✓ At 95°C: x_benz ≈ 0.41 (liquid), y_benz ≈ 0.63 (vapour). The column provides repeated liquid–vapour equilibria, each enriching the vapour in benzene.</div>
+</div></div></div>
+
+<div class="ex-card">
+<div class="ex-hdr" onclick="toggleEx(this)">
+  <div class="ex-num">7</div>
+  <div class="ex-meta"><div class="ex-title">Selecting the Correct Distillation Method</div><div class="ex-topic">Method Selection · SO 9.5 · CE Q3(a)</div></div>
+  <span class="coll-arrow">▼</span>
+</div>
+<div class="ex-body"><div class="ex-content">
+<p style="color:var(--text2);margin-bottom:14px;font-size:.9rem"><em>For each scenario, identify and justify the most appropriate separation technique:<br>W: Separating water from a dissolved salt.<br>X: Purifying nitrobenzene (bp 211°C, immiscible with water).<br>Y: Separating ethanol (bp 78.5°C) from methanol (bp 64.7°C).</em></p>
+<div class="step"><div class="step-num">Scenario W — Water from dissolved salt</div><div class="step-txt">
+  <strong>Technique: Simple distillation</strong><br>
+  The salt is involatile (no vapour pressure). On heating, only water evaporates and is condensed and collected as pure water. The bp difference is effectively infinite. A fractionating column is unnecessary.
+</div></div>
+<div class="step amb"><div class="step-num">Scenario X — Nitrobenzene (bp 211°C)</div><div class="step-txt">
+  <strong>Technique: Steam distillation</strong><br>
+  Nitrobenzene is immiscible with water and has a very high boiling point (211°C). Direct distillation at 211°C would risk decomposition. Steam distillation lowers the distillation temperature to ~99°C (well below 211°C), preventing thermal decomposition. The two-layer distillate is separated using a separating funnel.
+</div></div>
+<div class="step em"><div class="step-num">Scenario Y — Ethanol (78.5°C) from methanol (64.7°C)</div><div class="step-txt">
+  <strong>Technique: Fractional distillation</strong><br>
+  The boiling point difference is only 78.5 − 64.7 = 13.8°C — too small for effective simple distillation. A fractionating column with glass beads provides many liquid–vapour equilibria. Methanol (more volatile) distils first, followed by ethanol. Note: since methanol bp &lt; ethanol bp, methanol is more volatile and will be preferentially enriched in the distillate.
+</div></div>
+<div class="ans-box">✓ W: Simple distillation · X: Steam distillation · Y: Fractional distillation</div>
+</div></div></div>
+
+<div class="ex-card">
+<div class="ex-hdr" onclick="toggleEx(this)">
+  <div class="ex-num">8</div>
+  <div class="ex-meta"><div class="ex-title">Steam Distillation — Vapour Pressure from % Composition</div><div class="ex-topic">Steam Distillation · Back-calculation · CE Q4(b)</div></div>
+  <span class="coll-arrow">▼</span>
+</div>
+<div class="ex-body"><div class="ex-content">
+<p style="color:var(--text2);margin-bottom:14px;font-size:.9rem"><em>A sample of aniline (phenylamine, M = 93) is steam distilled at 98°C. The distillate contains 25.5% aniline by mass. At 98°C, P_total = 760 mmHg. Calculate the vapour pressure of aniline at 98°C.</em></p>
+<div class="step"><div class="step-num">Step 1 — Find the mole ratio from mass percentages</div><div class="step-txt">
+  In 100 g distillate: mass of aniline = 25.5 g, mass of water = 74.5 g.
+  <span class="mline">n_aniline = 25.5 / 93 = 0.2742 mol</span>
+  <span class="mline">n_water = 74.5 / 18 = 4.139 mol</span>
+  <span class="mline">Mole ratio n_water / n_aniline = 4.139 / 0.2742 = 15.09</span>
+</div></div>
+<div class="step amb"><div class="step-num">Step 2 — Relate mole ratio to vapour pressures</div><div class="step-txt">
+  For an immiscible mixture: n_water / n_aniline = P_water / P_aniline
+  <span class="mline">P_water / P_aniline = 15.09</span>
+  Also: P_water + P_aniline = 760 mmHg
+  <span class="mline">P_water = 760 − P_aniline</span>
+  <span class="mline">(760 − P_aniline) / P_aniline = 15.09</span>
+</div></div>
+<div class="step"><div class="step-num">Step 3 — Solve for P_aniline</div><div class="step-txt">
+  <span class="mline">760 − P_aniline = 15.09 × P_aniline</span>
+  <span class="mline">760 = 16.09 × P_aniline</span>
+  <span class="mline">P_aniline = 760 / 16.09 = 47.2 mmHg</span>
+  <span class="mline">P_water = 760 − 47.2 = 712.8 mmHg</span>
+</div></div>
+<div class="ans-box">✓ Vapour pressure of aniline at 98°C ≈ 47 mmHg · P_water ≈ 713 mmHg</div>
+</div></div></div>
+
+</div></div><!-- end ex-grid, panel-examples -->
+
+<!-- ===== QUIZ ===== -->
+<div class="tab-panel" id="panel-quiz">
+<h2 class="section-title">CAPE-Style Quiz</h2>
+<p class="section-subtitle">25 multiple choice questions covering all Phase Separation topics. Use the navigator to jump between questions.</p>
+<div class="quiz-layout">
+  <div class="quiz-sidebar">
+    <h3>Navigator</h3>
+    <div class="quiz-score"><div class="score-num" id="q-score">0/0</div><div class="score-lbl">Score</div></div>
+    <div class="q-grid" id="q-grid"></div>
+    <h3 style="margin-bottom:8px;font-size:.85rem">Filter by Topic</h3>
+    <button class="flt-btn active" onclick="filterQuiz('all',this)">All Topics</button>
+    <button class="flt-btn" onclick="filterQuiz('raoult',this)">Raoult's Law</button>
+    <button class="flt-btn" onclick="filterQuiz('distillation',this)">Distillation</button>
+    <button class="flt-btn" onclick="filterQuiz('azeotrope',this)">Azeotropes</button>
+    <button class="flt-btn" onclick="filterQuiz('steam',this)">Steam Distillation</button>
+    <button class="flt-btn" onclick="filterQuiz('solvent',this)">Solvent Extraction</button>
+    <button class="flt-btn" onclick="filterQuiz('vacuum',this)">Vacuum Distillation</button>
+    <button class="big-btn" style="margin-top:10px;padding:9px" onclick="resetQuiz()">↺ Reset Quiz</button>
+  </div>
+  <div class="quiz-main" id="quiz-main">
+    <div class="quiz-start">
+      <h2>Phase Separations Quiz</h2>
+      <p>Test your knowledge of distillation, Raoult's Law, azeotropes, steam distillation, and solvent extraction. 25 CAPE-style questions with detailed explanations.</p>
+      <button class="start-btn" onclick="startQuiz()">▶ Begin Quiz</button>
+    </div>
+  </div>
+</div>
+</div>
+</div><!-- main-content -->
+<script>
+// ===== TAB SWITCHING =====
+function switchTab(id){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  document.getElementById('btn-'+id).classList.add('active');
+  if(id==='sim'){setTimeout(initAllCharts,50);}
+}
+function switchSim(id){
+  document.querySelectorAll('.sim-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sbtn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sim-'+id).classList.add('active');
+  document.getElementById('sbtn-'+id).classList.add('active');
+  setTimeout(()=>{
+    if(id==='raoul')initRaoul();
+    if(id==='apparatus')initAppCanvas();
+    if(id==='azeo')initAzeoCharts();
+    if(id==='steam'){initSteamCanvas();updateSteamCalc();}
+  },50);
+}
+function tc(h){h.classList.toggle('open');h.nextElementSibling.classList.toggle('open');}
+function toggleEx(h){h.classList.toggle('open');h.nextElementSibling.classList.toggle('open');}
+
+// ===== MIXTURE DATA =====
+const MIXTURES={
+  'benz-tol':{name:'Benzene–Toluene',A:'Benzene',B:'Toluene',vpA:95.1,vpB:28.4,bpA:80.1,bpB:110.6,type:'ideal',
+    txy:[{x:0,T:110.6,y:0},{x:0.05,T:108.0,y:0.136},{x:0.1,T:105.5,y:0.261},{x:0.15,T:103.0,y:0.374},{x:0.2,T:100.5,y:0.476},{x:0.25,T:98.2,y:0.567},{x:0.3,T:95.9,y:0.647},{x:0.35,T:93.7,y:0.717},{x:0.4,T:91.5,y:0.779},{x:0.45,T:89.4,y:0.832},{x:0.5,T:87.3,y:0.878},{x:0.55,T:85.3,y:0.916},{x:0.6,T:83.3,y:0.946},{x:0.65,T:81.5,y:0.965},{x:0.7,T:83.6,y:0.975},{x:0.75,T:83.3,y:0.982},{x:0.8,T:84.1,y:0.987},{x:0.85,T:83.2,y:0.991},{x:0.9,T:82.2,y:0.995},{x:0.95,T:81.2,y:0.998},{x:1.0,T:80.1,y:1.0}]},
+  'hex-hep':{name:'Hexane–Heptane',A:'Hexane',B:'Heptane',vpA:150.6,vpB:45.8,bpA:68.7,bpB:98.4,type:'ideal',
+    txy:[{x:0,T:98.4,y:0},{x:0.1,T:95.1,y:0.270},{x:0.2,T:91.9,y:0.476},{x:0.3,T:88.8,y:0.632},{x:0.4,T:85.9,y:0.752},{x:0.5,T:83.0,y:0.843},{x:0.6,T:80.3,y:0.907},{x:0.7,T:77.6,y:0.949},{x:0.8,T:75.1,y:0.974},{x:0.9,T:72.4,y:0.990},{x:1.0,T:68.7,y:1.0}]},
+  'eth-water':{name:'Ethanol–Water',A:'Ethanol',B:'Water',vpA:59.3,vpB:23.8,bpA:78.5,bpB:100.0,type:'positive',azeo:{x:0.894,T:78.2},
+    txy:[{x:0,T:100.0,y:0},{x:0.019,T:95.5,y:0.17},{x:0.0721,T:89.0,y:0.3891},{x:0.0966,T:86.7,y:0.4375},{x:0.1238,T:85.3,y:0.4704},{x:0.1661,T:84.1,y:0.5089},{x:0.2337,T:82.7,y:0.5445},{x:0.2608,T:82.3,y:0.558},{x:0.3273,T:81.5,y:0.583},{x:0.3965,T:80.7,y:0.6122},{x:0.5079,T:79.8,y:0.6564},{x:0.5198,T:79.7,y:0.6599},{x:0.5732,T:79.3,y:0.6841},{x:0.6763,T:78.74,y:0.7385},{x:0.7472,T:78.41,y:0.7815},{x:0.894,T:78.2,y:0.894}]},
+  'acet-chcl3':{name:'Acetone–Chloroform',A:'Acetone',B:'CHCl₃',vpA:231.4,vpB:199.0,bpA:56.1,bpB:61.2,type:'negative',azeo:{x:0.35,T:64.5},
+    txy:[{x:0,T:61.2,y:0},{x:0.05,T:62.4,y:0.031},{x:0.1,T:63.1,y:0.064},{x:0.15,T:63.8,y:0.10},{x:0.2,T:64.2,y:0.14},{x:0.25,T:64.4,y:0.19},{x:0.3,T:64.48,y:0.26},{x:0.35,T:64.5,y:0.35},{x:0.4,T:64.3,y:0.44},{x:0.45,T:63.9,y:0.52},{x:0.5,T:63.3,y:0.59},{x:0.55,T:62.5,y:0.65},{x:0.6,T:61.5,y:0.71},{x:0.65,T:60.6,y:0.76},{x:0.7,T:59.6,y:0.82},{x:0.75,T:58.7,y:0.87},{x:0.8,T:57.8,y:0.91},{x:0.85,T:57.1,y:0.95},{x:0.9,T:56.6,y:0.97},{x:0.95,T:56.2,y:0.99},{x:1.0,T:56.1,y:1.0}]}
+};
+const STEAM_COMPOUNDS={
+  nitrobenzene:{name:'Nitrobenzene',M:123,bp:211,tdist:99,po:27},
+  phenylamine:{name:'Phenylamine (Aniline)',M:93,bp:184,tdist:98.6,po:53},
+  bromobenzene:{name:'Bromobenzene',M:157,bp:156,tdist:95,po:120},
+  eugenol:{name:'Eugenol',M:164,bp:255,tdist:98.5,po:34}
+};
+
+// ===== RAOULT'S LAW SIM =====
+let raoulChart=null,raoulMode='px',raoulData=[];
+function initRaoul(){
+  const ctx=document.getElementById('chartRaoul');
+  if(!ctx)return;
+  if(raoulChart){raoulChart.destroy();}
+  raoulChart=new Chart(ctx,{type:'scatter',data:{datasets:[]},options:{responsive:true,maintainAspectRatio:false,animation:{duration:400},plugins:{legend:{display:false},tooltip:{callbacks:{label:d=>`(${d.parsed.x.toFixed(3)}, ${d.parsed.y.toFixed(2)})`}}},scales:{x:{min:0,max:1,title:{display:true,text:'Mole fraction x_A',color:'#9ab0cc',font:{size:11}},grid:{color:'rgba(36,53,83,.5)'},ticks:{color:'#5c7a9a'}},y:{title:{display:true,text:'',color:'#9ab0cc',font:{size:11}},grid:{color:'rgba(36,53,83,.5)'},ticks:{color:'#5c7a9a'}}}}});
+  updateRaoulChart();
+  updateRaoulCalc();
+}
+function setRaoulMode(m){raoulMode=m;document.getElementById('togPx').classList.toggle('active',m==='px');document.getElementById('togTx').classList.toggle('active',m==='tx');updateRaoulChart();}
+function updateRaoulChart(){
+  const mix=MIXTURES[document.getElementById('rl-mix').value];
+  if(!raoulChart||!mix)return;
+  if(raoulMode==='px'){
+    const liqX=[],vapX=[],idealX=[];
+    for(let x=0;x<=1.001;x+=0.02){const xa=Math.min(x,1);const pa=mix.vpA*xa;const pb=mix.vpB*(1-xa);const pt=pa+pb;liqX.push({x:xa,y:pt});const ideal=mix.vpA*xa+mix.vpB*(1-xa);idealX.push({x:xa,y:ideal});}
+    for(let x=0;x<=1.001;x+=0.02){const xa=Math.min(x,1);const pa=mix.vpA*xa;const pb=mix.vpB*(1-xa);const pt=pa+pb;if(pt>0){const ya=pa/pt;vapX.push({x:ya,y:pt});}}
+    raoulChart.options.scales.y.title.text='Vapour Pressure (mmHg)';
+    raoulChart.data.datasets=[
+      {data:liqX,borderColor:'#00c6d4',backgroundColor:'rgba(0,198,212,.12)',showLine:true,tension:0.3,pointRadius:0,borderWidth:2.5,label:'Liquid'},
+      {data:vapX,borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,.1)',showLine:true,tension:0.3,pointRadius:0,borderWidth:2.5,label:'Vapour'},
+      {data:idealX,borderColor:'rgba(129,140,248,.5)',showLine:true,tension:0,pointRadius:0,borderWidth:1.5,borderDash:[5,4],label:'Ideal'}
+    ];
+    if(mix.azeo){raoulChart.data.datasets.push({data:[{x:mix.azeo.x,y:mix.vpA*mix.azeo.x+mix.vpB*(1-mix.azeo.x)}],borderColor:'#f43f5e',backgroundColor:'#f43f5e',pointRadius:8,pointStyle:'star',showLine:false,label:'Azeotrope'});}
+  } else {
+    const liqPts=mix.txy.map(d=>({x:d.x,y:d.T}));
+    const vapPts=mix.txy.map(d=>({x:d.y,y:d.T}));
+    raoulChart.options.scales.y.title.text='Temperature (°C)';
+    raoulChart.data.datasets=[
+      {data:liqPts,borderColor:'#00c6d4',backgroundColor:'rgba(0,198,212,.12)',showLine:true,tension:0.3,pointRadius:3,borderWidth:2.5,label:'Liquid'},
+      {data:vapPts,borderColor:'#f59e0b',backgroundColor:'rgba(245,158,11,.1)',showLine:true,tension:0.3,pointRadius:3,borderWidth:2.5,label:'Vapour'}
+    ];
+    if(mix.azeo){raoulChart.data.datasets.push({data:[{x:mix.azeo.x,y:mix.azeo.T}],borderColor:'#f43f5e',backgroundColor:'#f43f5e',pointRadius:9,pointStyle:'star',showLine:false,label:'Azeotrope'});}
+  }
+  raoulChart.update();
+  updateRaoulCalc();
+}
+function updateRaoulCalc(){
+  const mix=MIXTURES[document.getElementById('rl-mix')?.value];if(!mix)return;
+  const xa=parseFloat(document.getElementById('rl-xa').value);
+  document.getElementById('rl-xa-v').textContent=xa.toFixed(2);
+  const pa=mix.vpA*xa,pb=mix.vpB*(1-xa),pt=pa+pb,ya=pt>0?pa/pt:0;
+  document.getElementById('rl-pa').textContent=pa.toFixed(1)+' mmHg';
+  document.getElementById('rl-pb').textContent=pb.toFixed(1)+' mmHg';
+  document.getElementById('rl-pt').textContent=pt.toFixed(1)+' mmHg';
+  document.getElementById('rl-ya').textContent=ya.toFixed(3);
+  document.getElementById('rl-formula-disp').innerHTML=`<strong style="color:var(--text)">${mix.name}</strong> | P°<sub>A</sub> = ${mix.vpA} mmHg, P°<sub>B</sub> = ${mix.vpB} mmHg<br>
+  P_A = ${mix.vpA} × ${xa.toFixed(2)} = <strong style="color:var(--primary)">${pa.toFixed(1)} mmHg</strong> &nbsp;|&nbsp; 
+  P_B = ${mix.vpB} × ${(1-xa).toFixed(2)} = <strong style="color:var(--amber)">${pb.toFixed(1)} mmHg</strong> &nbsp;|&nbsp; 
+  y_A = ${pa.toFixed(1)}/${pt.toFixed(1)} = <strong style="color:var(--emerald)">${ya.toFixed(3)}</strong>`;
+}
+function recordRaoul(){
+  const mix=MIXTURES[document.getElementById('rl-mix').value];
+  const xa=parseFloat(document.getElementById('rl-xa').value);
+  const pa=mix.vpA*xa,pb=mix.vpB*(1-xa),pt=pa+pb,ya=pt>0?pa/pt:0;
+  raoulData.push({xa:xa.toFixed(2),pa:pa.toFixed(1),pb:pb.toFixed(1),pt:pt.toFixed(1),ya:ya.toFixed(3)});
+  renderRaoulTable();
+}
+function renderRaoulTable(){
+  const t=document.getElementById('raoulTable');
+  if(!raoulData.length){t.innerHTML='<tr class="tbl-header"><th>x_A</th><th>P_A (mmHg)</th><th>P_B (mmHg)</th><th>P_total (mmHg)</th><th>y_A</th></tr><tr><td colspan="5" class="tbl-empty">No data recorded yet.</td></tr>';return;}
+  t.innerHTML='<tr><th>x_A</th><th>P_A (mmHg)</th><th>P_B (mmHg)</th><th>P_total (mmHg)</th><th>y_A</th></tr>'+raoulData.map(r=>`<tr><td>${r.xa}</td><td>${r.pa}</td><td>${r.pb}</td><td>${r.pt}</td><td>${r.ya}</td></tr>`).join('');
+}
+function clearRaoulData(){raoulData=[];renderRaoulTable();}
+
+// ===== DISTILLATION APPARATUS =====
+let appCanvas,appCtx,appType='simple',distRunning=false,distTimer=null,distTime=0,distData=[];
+const MIXTURES_DIST={
+  beer:{name:'Beer (5% EtOH)',etoh0:0.05,bpStart:99,bpEnd:78.5,distBP:78.5,note:'Beer is dilute ethanol. Simple distillation gives ~40–50% EtOH distillate. Fractional gives purer product.'},
+  wine:{name:'Wine (12% EtOH)',etoh0:0.12,bpStart:97,bpEnd:78.5,distBP:78.5,note:'Wine (12% EtOH) produces a more concentrated distillate. Fractional column essential for high purity.'},
+  rum:{name:'Rum wash (40% EtOH)',etoh0:0.40,bpStart:85,bpEnd:78.5,distBP:78.5,note:'Rum wash is already concentrated. Simple distillation gives ~75% EtOH; fractional approaches azeotrope (95.6%).'},
+  'benzene-toluene':{name:'Benzene–Toluene',etoh0:null,bpStart:110,bpEnd:80.1,distBP:80.1,note:'Benzene (bp 80.1°C) and toluene (bp 110.6°C) differ by 30.5°C. Simple distillation sufficient; fractional gives purer benzene fraction.'},
+  'water-salt':{name:'Salt solution',etoh0:null,bpStart:102,bpEnd:100,distBP:100,note:'Salt is involatile. Only water distils — pure water collected. Simple distillation (no fractionating column needed).'}
+};
+function initAppCanvas(){
+  appCanvas=document.getElementById('appCanvas');
+  if(!appCanvas)return;
+  appCtx=appCanvas.getContext('2d');
+  drawApparatus();
+}
+function setApparatus(type){
+  appType=type;
+  document.getElementById('tog-simple').classList.toggle('active',type==='simple');
+  document.getElementById('tog-frac').classList.toggle('active',type==='fractional');
+  document.getElementById('app-title').textContent=type==='simple'?'Simple Distillation Apparatus':'Fractional Distillation Apparatus';
+  drawApparatus();
+}
+let _animFrame=null,_flamePhase=0,_vapourParticles=[];
+function drawApparatus(){
+  if(!appCtx)return;
+  const c=appCtx,W=appCanvas.width,H=appCanvas.height;
+  c.clearRect(0,0,W,H);
+  c.fillStyle='#0a1525';c.fillRect(0,0,W,H);
+  // tripod
+  c.strokeStyle='#4a6080';c.lineWidth=3;
+  c.beginPath();c.moveTo(100,330);c.lineTo(230,290);c.stroke();
+  c.beginPath();c.moveTo(170,350);c.lineTo(230,290);c.stroke();
+  c.beginPath();c.moveTo(130,380);c.lineTo(230,290);c.stroke();
+  // wire gauze
+  c.strokeStyle='#5c7a9a';c.lineWidth=2;
+  c.strokeRect(185,282,90,8);
+  for(let i=0;i<=6;i++){c.beginPath();c.moveTo(185+i*15,282);c.lineTo(185+i*15,290);c.stroke();}
+  // flame
+  if(distRunning){
+    _flamePhase+=0.15;
+    const heatPct=parseFloat(document.getElementById('app-heat')?.value||50)/100;
+    const fH=20+heatPct*15+Math.sin(_flamePhase)*4;
+    const grad=c.createRadialGradient(230,295,2,230,295-fH,fH);
+    grad.addColorStop(0,'rgba(255,255,150,0.95)');grad.addColorStop(0.4,'rgba(255,120,0,0.8)');grad.addColorStop(1,'rgba(255,50,0,0)');
+    c.fillStyle=grad;c.beginPath();c.ellipse(230,295-fH/2,10+heatPct*5,fH,0,0,Math.PI*2);c.fill();
+  } else {
+    c.fillStyle='rgba(100,130,180,0.4)';c.beginPath();c.arc(230,290,6,0,Math.PI*2);c.fill();
+  }
+  // round-bottom flask
+  c.strokeStyle='rgba(150,200,255,0.7)';c.lineWidth=2.5;
+  c.beginPath();c.arc(230,240,52,0,Math.PI*2);c.stroke();
+  // liquid in flask
+  const liqH=distRunning?Math.max(20,40-distTime*0.08):42;
+  c.save();c.beginPath();c.arc(230,240,50,0,Math.PI*2);c.clip();
+  const lg=c.createLinearGradient(0,220,0,292);
+  lg.addColorStop(0,'rgba(100,180,255,0.15)');lg.addColorStop(1,'rgba(100,180,255,0.45)');
+  c.fillStyle=lg;c.fillRect(180,240+52-liqH,100,liqH);
+  c.restore();
+  // neck of flask
+  c.strokeStyle='rgba(150,200,255,0.7)';c.lineWidth=2.5;
+  c.beginPath();c.moveTo(215,195);c.lineTo(218,188);c.stroke();
+  c.beginPath();c.moveTo(245,195);c.lineTo(242,188);c.stroke();
+  // still head / side arm
+  c.beginPath();c.moveTo(218,188);c.lineTo(242,188);c.stroke();
+  c.beginPath();c.moveTo(230,188);c.lineTo(230,160);c.stroke();
+  // fractionating column (if fractional)
+  if(appType==='fractional'){
+    c.strokeStyle='rgba(150,200,255,0.7)';c.lineWidth=2.5;
+    c.strokeRect(223,100,14,65);
+    // glass beads
+    for(let i=0;i<6;i++){
+      for(let j=0;j<2;j++){
+        c.fillStyle='rgba(150,200,255,0.3)';c.beginPath();c.arc(226+j*8,108+i*9,3.5,0,Math.PI*2);c.fill();
+        c.strokeStyle='rgba(150,200,255,0.5)';c.lineWidth=0.5;c.stroke();
+      }
+    }
+    c.strokeStyle='rgba(150,200,255,0.7)';c.lineWidth=2.5;
+    c.beginPath();c.moveTo(230,100);c.lineTo(230,80);c.stroke();
+    c.beginPath();c.moveTo(230,80);c.lineTo(310,80);c.stroke();
+    c.beginPath();c.moveTo(310,80);c.lineTo(310,130);c.stroke();
+    var condStart=130;
+  } else {
+    c.beginPath();c.moveTo(230,160);c.lineTo(310,130);c.stroke();
+    var condStart=130;
+  }
+  // Liebig condenser
+  c.strokeStyle='rgba(150,200,255,0.85)';c.lineWidth=2.5;
+  c.beginPath();c.moveTo(305,condStart);c.lineTo(430,condStart+60);c.stroke();
+  c.beginPath();c.moveTo(310,condStart-8);c.lineTo(435,condStart+52);c.stroke();
+  // water flow arrows
+  c.strokeStyle='rgba(0,198,212,0.6)';c.lineWidth=1.5;
+  c.beginPath();c.moveTo(430,condStart+55);c.lineTo(430,condStart+45);c.stroke(); // water in arrow
+  c.fillStyle='rgba(0,198,212,0.6)';c.beginPath();c.moveTo(430,condStart+45);c.lineTo(426,condStart+55);c.lineTo(434,condStart+55);c.closePath();c.fill();
+  c.font='10px DM Sans';c.fillStyle='rgba(0,198,212,0.8)';c.fillText('water in',434,condStart+52);
+  c.strokeStyle='rgba(0,198,212,0.6)';c.beginPath();c.moveTo(310,condStart-5);c.lineTo(310,condStart+8);c.stroke();
+  c.fillStyle='rgba(0,198,212,0.6)';c.beginPath();c.moveTo(310,condStart+8);c.lineTo(306,condStart-2);c.lineTo(314,condStart-2);c.closePath();c.fill();
+  c.fillText('water out',315,condStart);
+  // condenser exit tube
+  c.strokeStyle='rgba(150,200,255,0.7)';c.lineWidth=2.5;
+  c.beginPath();c.moveTo(435,condStart+52);c.lineTo(440,condStart+80);c.stroke();
+  // receiver flask
+  c.beginPath();c.arc(450,condStart+110,28,0,Math.PI*2);c.stroke();
+  // distillate in receiver
+  if(distTime>0){
+    const dVol=Math.min(distTime*0.15,20);
+    c.save();c.beginPath();c.arc(450,condStart+110,26,0,Math.PI*2);c.clip();
+    c.fillStyle='rgba(100,200,255,0.5)';c.fillRect(424,condStart+110+28-dVol,52,dVol);
+    c.restore();
+  }
+  // thermometer
+  c.strokeStyle='rgba(255,150,150,0.8)';c.lineWidth=1.5;
+  c.beginPath();c.moveTo(appType==='fractional'?230:230,appType==='fractional'?75:155);
+  c.lineTo(appType==='fractional'?230:230,appType==='fractional'?55:175);c.stroke();
+  c.fillStyle='rgba(255,100,100,0.8)';c.beginPath();c.arc(appType==='fractional'?230:230,appType==='fractional'?75:155,3,0,Math.PI*2);c.fill();
+  // vapour particles
+  if(distRunning&&_vapourParticles.length>0){
+    _vapourParticles.forEach(p=>{
+      c.globalAlpha=p.a;c.fillStyle='#b8d8ff';c.beginPath();c.arc(p.x,p.y,2,0,Math.PI*2);c.fill();
+    });
+    c.globalAlpha=1;
+  }
+  // labels
+  c.font='11px DM Sans';c.fillStyle='rgba(156,176,204,0.8)';
+  c.fillText('Round-bottom flask',135,360);
+  c.fillText('Condenser',340,condStart-15);
+  c.fillText('Receiver',455,condStart+150);
+  if(appType==='fractional'){c.fillStyle='rgba(0,198,212,0.8)';c.fillText('Fractionating',195,96);c.fillText('Column',202,107);}
+}
+function animateApparatus(){
+  if(!distRunning)return;
+  _flamePhase+=0.1;
+  const heatPct=parseFloat(document.getElementById('app-heat')?.value||50)/100;
+  // update vapour particles
+  if(Math.random()<heatPct*0.4){
+    _vapourParticles.push({x:210+Math.random()*40,y:195,vx:(Math.random()-0.5)*0.5,vy:-1.5-Math.random(),a:0.8});
+  }
+  _vapourParticles=_vapourParticles.filter(p=>{p.x+=p.vx;p.y+=p.vy;p.a-=0.02;return p.a>0;});
+  drawApparatus();
+  _animFrame=requestAnimationFrame(animateApparatus);
+}
+let distFlaskT=25,distVapT=25,distDistVol=0;
+function toggleDistillation(){
+  distRunning=!distRunning;
+  const btn=document.getElementById('dist-start-btn');
+  const badge=document.getElementById('dist-badge');
+  if(distRunning){
+    btn.textContent='⏹ Stop';badge.className='sbadge badge-run';badge.textContent='RUNNING';
+    animateApparatus();
+    distTimer=setInterval(updateDistillation,500);
+  } else {
+    btn.textContent='▶ Start';badge.className='sbadge badge-stop';badge.textContent='STOPPED';
+    clearInterval(distTimer);cancelAnimationFrame(_animFrame);drawApparatus();
+  }
+}
+function updateDistillation(){
+  const heat=parseFloat(document.getElementById('app-heat')?.value||50)/100;
+  const mixKey=document.getElementById('app-mix')?.value;
+  const mix=MIXTURES_DIST[mixKey]||MIXTURES_DIST.beer;
+  distTime+=0.5;
+  const targetFlask=mix.bpStart+(mix.bpEnd-mix.bpStart)*Math.min(1,distTime/30);
+  distFlaskT+=(targetFlask*heat-distFlaskT)*0.1;
+  distFlaskT=Math.min(distFlaskT,mix.bpStart);
+  if(distFlaskT>75){
+    distVapT+=(mix.distBP-distVapT)*0.12;
+    distDistVol+=heat*0.15;
+  }
+  document.getElementById('d-flask-t').textContent=distFlaskT.toFixed(1)+'°C';
+  document.getElementById('d-vap-t').textContent=distVapT.toFixed(1)+'°C';
+  document.getElementById('d-dist-v').textContent=distDistVol.toFixed(1)+' mL';
+  const etohPct=mix.etoh0!=null?(appType==='simple'?Math.min(95,mix.etoh0*100*3.5):Math.min(95.6,mix.etoh0*100*7)):null;
+  document.getElementById('d-etoh').textContent=etohPct!=null?etohPct.toFixed(1)+'%':'—';
+  document.getElementById('app-note-txt').textContent=mix.note;
+}
+function resetDistillation(){
+  distRunning=false;distTime=0;distFlaskT=25;distVapT=25;distDistVol=0;_vapourParticles=[];
+  clearInterval(distTimer);cancelAnimationFrame(_animFrame);
+  document.getElementById('dist-start-btn').textContent='▶ Start';
+  document.getElementById('dist-badge').className='sbadge badge-stop';document.getElementById('dist-badge').textContent='STOPPED';
+  document.getElementById('d-flask-t').textContent='25.0°C';document.getElementById('d-vap-t').textContent='25.0°C';
+  document.getElementById('d-dist-v').textContent='0.0 mL';document.getElementById('d-etoh').textContent='—';
+  document.getElementById('app-note-txt').textContent='Select a mixture and press Start to begin.';
+  drawApparatus();
+}
+function recordDist(){
+  distData.push([distTime.toFixed(0),distFlaskT.toFixed(1),distVapT.toFixed(1),distDistVol.toFixed(1),document.getElementById('d-etoh').textContent]);
+  const t=document.getElementById('distTable');
+  t.innerHTML='<tr><th>Time (s)</th><th>Flask Temp (°C)</th><th>Vapour Temp (°C)</th><th>Distillate (mL)</th><th>EtOH%</th></tr>'+distData.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`).join('');
+}
+
+// ===== AZEOTROPE CHARTS =====
+let chartAzeoPos=null,chartAzeoNeg=null,chartAzeoIdeal=null;
+const ETHANOL_WATER_TXY=[{x:0,T:100.0,y:0},{x:0.019,T:95.5,y:0.17},{x:0.0721,T:89.0,y:0.3891},{x:0.0966,T:86.7,y:0.4375},{x:0.1238,T:85.3,y:0.4704},{x:0.1661,T:84.1,y:0.5089},{x:0.2337,T:82.7,y:0.5445},{x:0.2608,T:82.3,y:0.558},{x:0.3273,T:81.5,y:0.583},{x:0.3965,T:80.7,y:0.6122},{x:0.5079,T:79.8,y:0.6564},{x:0.5732,T:79.3,y:0.6841},{x:0.6763,T:78.74,y:0.7385},{x:0.7472,T:78.41,y:0.7815},{x:0.894,T:78.2,y:0.894},{x:1.0,T:78.5,y:1.0}];
+const HNO3_WATER_TXY=[{x:0,T:100.0,y:0},{x:0.05,T:103.5,y:0.018},{x:0.10,T:107.0,y:0.038},{x:0.15,T:109.8,y:0.062},{x:0.20,T:112.2,y:0.092},{x:0.25,T:114.1,y:0.13},{x:0.30,T:116.0,y:0.18},{x:0.35,T:117.5,y:0.25},{x:0.384,T:120.5,y:0.384},{x:0.40,T:120.3,y:0.42},{x:0.45,T:119.0,y:0.50},{x:0.50,T:117.5,y:0.57},{x:0.60,T:113.8,y:0.68},{x:0.70,T:109.5,y:0.78},{x:0.80,T:103.5,y:0.87},{x:0.90,T:96.5,y:0.94},{x:1.0,T:86.0,y:1.0}];
+const chartDefaults={responsive:true,maintainAspectRatio:false,animation:{duration:500},plugins:{legend:{display:false},tooltip:{callbacks:{label:d=>`(${d.parsed.x.toFixed(3)}, ${d.parsed.y.toFixed(2)})`}}},scales:{x:{min:0,max:1,title:{display:true,text:'Mole fraction x (or y)',color:'#9ab0cc',font:{size:11}},grid:{color:'rgba(36,53,83,.5)'},ticks:{color:'#5c7a9a'}},y:{title:{display:true,text:'Temperature (°C)',color:'#9ab0cc',font:{size:11}},grid:{color:'rgba(36,53,83,.5)'},ticks:{color:'#5c7a9a'}}}};
+function initAzeoCharts(){
+  // Positive
+  const ctxP=document.getElementById('chartAzeoPos');
+  if(ctxP&&!chartAzeoPos){
+    chartAzeoPos=new Chart(ctxP,{type:'scatter',data:{datasets:[
+      {data:ETHANOL_WATER_TXY.map(d=>({x:d.x,y:d.T})),borderColor:'#00c6d4',showLine:true,tension:0.3,pointRadius:2.5,borderWidth:2.5,fill:false},
+      {data:ETHANOL_WATER_TXY.map(d=>({x:d.y,y:d.T})),borderColor:'#f59e0b',showLine:true,tension:0.3,pointRadius:2.5,borderWidth:2.5,fill:false},
+      {data:[{x:0.894,y:78.2}],borderColor:'#f43f5e',backgroundColor:'#f43f5e',pointRadius:10,pointStyle:'star',showLine:false}
+    ]},options:{...JSON.parse(JSON.stringify(chartDefaults)),plugins:{...chartDefaults.plugins,annotation:{annotations:{line1:{type:'point',xValue:0.894,yValue:78.2}}}}}});
+  }
+  // Negative
+  const ctxN=document.getElementById('chartAzeoNeg');
+  if(ctxN&&!chartAzeoNeg){
+    chartAzeoNeg=new Chart(ctxN,{type:'scatter',data:{datasets:[
+      {data:HNO3_WATER_TXY.map(d=>({x:d.x,y:d.T})),borderColor:'#00c6d4',showLine:true,tension:0.3,pointRadius:2.5,borderWidth:2.5,fill:false},
+      {data:HNO3_WATER_TXY.map(d=>({x:d.y,y:d.T})),borderColor:'#f59e0b',showLine:true,tension:0.3,pointRadius:2.5,borderWidth:2.5,fill:false},
+      {data:[{x:0.384,y:120.5}],borderColor:'#818cf8',backgroundColor:'#818cf8',pointRadius:10,pointStyle:'star',showLine:false}
+    ]},options:{...JSON.parse(JSON.stringify(chartDefaults))}});
+  }
+  // Ideal with path
+  const ctxI=document.getElementById('chartAzeoIdeal');
+  if(ctxI&&!chartAzeoIdeal){
+    const mix=MIXTURES['benz-tol'];
+    chartAzeoIdeal=new Chart(ctxI,{type:'scatter',data:{datasets:[
+      {data:mix.txy.map(d=>({x:d.x,y:d.T})),borderColor:'#00c6d4',showLine:true,tension:0.3,pointRadius:2,borderWidth:2.5,fill:false},
+      {data:mix.txy.map(d=>({x:d.y,y:d.T})),borderColor:'#f59e0b',showLine:true,tension:0.3,pointRadius:2,borderWidth:2.5,fill:false},
+      {data:[],borderColor:'#10b981',backgroundColor:'rgba(16,185,129,0.8)',showLine:true,tension:0,pointRadius:5,borderWidth:2,borderDash:[4,3]}
+    ]},options:{...JSON.parse(JSON.stringify(chartDefaults))}});
+  }
+  updateAzeoPath();
+}
+function updateAzeoPath(){
+  const v=parseFloat(document.getElementById('az-start')?.value||0.3);
+  document.getElementById('az-start-v').textContent=v.toFixed(2);
+  if(!chartAzeoIdeal)return;
+  const mix=MIXTURES['benz-tol'];
+  const path=[];
+  let x=v;
+  for(let step=0;step<7;step++){
+    const row=mix.txy.reduce((a,b)=>Math.abs(b.x-x)<Math.abs(a.x-x)?b:a);
+    path.push({x:row.x,y:row.T});
+    if(row.y>=0.999){break;}
+    path.push({x:row.y,y:row.T});
+    x=row.y;
+  }
+  chartAzeoIdeal.data.datasets[2].data=path;
+  chartAzeoIdeal.update();
+  const startX=v.toFixed(2),endY=path[path.length-1]?.x.toFixed(3)||'?';
+  document.getElementById('azeo-path-explain').innerHTML=`Starting at x<sub>benz</sub> = ${startX}, each horizontal tie-line at a given temperature connects the liquid composition (on the blue bubble-point curve) to the vapour composition (on the amber dew-point curve). The vapour (y<sub>benz</sub> ≈ ${endY} after ${Math.floor(path.length/2)} stages) is always richer in benzene. In a real fractionating column, these equilibrium stages occur along the column height. With enough theoretical plates, the distillate approaches pure benzene (bp 80.1°C).`;
+}
+
+// ===== STEAM DISTILLATION CANVAS =====
+let steamCanvas,steamCtx,steamRunning=false,steamTimer=null,steamPhase=0,steamBubbles=[],steamData=[];
+function initSteamCanvas(){
+  steamCanvas=document.getElementById('steamCanvas');
+  if(!steamCanvas)return;
+  steamCtx=steamCanvas.getContext('2d');
+  drawSteam();
+  updateSteamCalc();
+}
+function drawSteam(){
+  if(!steamCtx)return;
+  const c=steamCtx,W=steamCanvas.width,H=steamCanvas.height;
+  c.clearRect(0,0,W,H);c.fillStyle='#0a1525';c.fillRect(0,0,W,H);
+  // steam generator flask (left)
+  c.strokeStyle='rgba(150,200,255,0.7)';c.lineWidth=2.5;
+  c.beginPath();c.arc(90,310,55,0,Math.PI*2);c.stroke();
+  c.save();c.beginPath();c.arc(90,310,53,0,Math.PI*2);c.clip();
+  c.fillStyle='rgba(100,180,255,0.35)';c.fillRect(37,280,106,82);c.restore();
+  c.beginPath();c.moveTo(76,258);c.lineTo(80,238);c.stroke();
+  c.beginPath();c.moveTo(104,258);c.lineTo(100,238);c.stroke();
+  c.beginPath();c.moveTo(80,238);c.lineTo(100,238);c.stroke();
+  // flame under generator
+  if(steamRunning){
+    steamPhase+=0.15;
+    const g=c.createRadialGradient(90,315,3,90,298,20);
+    g.addColorStop(0,'rgba(255,255,120,0.95)');g.addColorStop(0.5,'rgba(255,120,0,0.8)');g.addColorStop(1,'rgba(255,0,0,0)');
+    c.fillStyle=g;c.beginPath();c.ellipse(90,305,12,18+Math.sin(steamPhase)*3,0,0,Math.PI*2);c.fill();
+  }
+  // delivery tube to main flask
+  c.strokeStyle='rgba(150,200,255,0.7)';c.lineWidth=2.5;
+  c.beginPath();c.moveTo(100,238);c.lineTo(190,238);c.lineTo(190,210);c.stroke();
+  // steam bubbles in tube
+  if(steamRunning){
+    steamBubbles.forEach(b=>{c.globalAlpha=b.a;c.strokeStyle='rgba(180,230,255,0.7)';c.lineWidth=1;c.beginPath();c.arc(b.x,b.y,b.r,0,Math.PI*2);c.stroke();});
+    c.globalAlpha=1;
+  }
+  // main flask (centre)
+  c.strokeStyle='rgba(150,200,255,0.7)';c.lineWidth=2.5;
+  c.beginPath();c.arc(280,290,60,0,Math.PI*2);c.stroke();
+  c.save();c.beginPath();c.arc(280,290,58,0,Math.PI*2);c.clip();
+  c.fillStyle='rgba(100,200,100,0.25)';c.fillRect(222,270,116,80);
+  c.fillStyle='rgba(100,180,255,0.25)';c.fillRect(222,310,116,40);c.restore();
+  c.beginPath();c.moveTo(265,233);c.lineTo(268,213);c.stroke();
+  c.beginPath();c.moveTo(295,233);c.lineTo(292,213);c.stroke();
+  c.beginPath();c.moveTo(268,213);c.lineTo(292,213);c.stroke();
+  c.beginPath();c.moveTo(190,210);c.lineTo(268,213);c.stroke();
+  // condenser
+  c.beginPath();c.moveTo(295,213);c.lineTo(420,213);c.stroke();
+  c.beginPath();c.moveTo(295,205);c.lineTo(420,205);c.stroke();
+  // water jacket arrows
+  c.strokeStyle='rgba(0,198,212,0.7)';c.lineWidth=1.5;
+  c.beginPath();c.moveTo(415,209);c.lineTo(415,215);c.stroke();c.fillStyle='rgba(0,198,212,0.7)';c.beginPath();c.moveTo(415,215);c.lineTo(412,209);c.lineTo(418,209);c.closePath();c.fill();
+  c.font='10px DM Sans';c.fillStyle='rgba(0,198,212,0.8)';c.fillText('water in',420,213);
+  // receiver
+  c.strokeStyle='rgba(150,200,255,0.7)';c.lineWidth=2.5;
+  c.beginPath();c.moveTo(420,209);c.lineTo(425,260);c.stroke();
+  c.beginPath();c.arc(445,290,30,0,Math.PI*2);c.stroke();
+  // two layers in receiver
+  c.save();c.beginPath();c.arc(445,290,28,0,Math.PI*2);c.clip();
+  c.fillStyle='rgba(100,180,255,0.4)';c.fillRect(417,285,56,33);
+  c.fillStyle='rgba(100,200,80,0.55)';c.fillRect(417,270,56,15);c.restore();
+  // labels
+  c.font='11px DM Sans';c.fillStyle='rgba(156,176,204,0.8)';
+  c.fillText('Steam generator',40,380);c.fillText('Organic + water',215,360);
+  c.fillText('Condenser',330,198);c.fillText('Two layers',442,330);
+  c.fillStyle='rgba(100,200,80,0.9)';c.fillText('organic',450,272);
+  c.fillStyle='rgba(100,180,255,0.9)';c.fillText('water',452,302);
+  if(steamRunning){c.font='bold 11px DM Sans';c.fillStyle='rgba(255,200,100,0.9)';c.fillText('⟶ steam',118,232);}
+}
+let steamAnimFrame=null;
+function animateSteam(){
+  if(!steamRunning)return;
+  steamPhase+=0.1;
+  if(Math.random()<0.3){steamBubbles.push({x:90+Math.random()*8,y:280+Math.random()*20,r:2+Math.random()*4,a:0.7,vy:-0.8-Math.random()*0.5});}
+  steamBubbles=steamBubbles.filter(b=>{b.y+=b.vy;b.a-=0.015;return b.a>0;});
+  drawSteam();
+  steamAnimFrame=requestAnimationFrame(animateSteam);
+}
+function toggleSteam(){
+  steamRunning=!steamRunning;
+  const btn=document.getElementById('steam-start-btn');
+  if(steamRunning){btn.textContent='⏹ Stop Steam';animateSteam();}
+  else{btn.textContent='▶ Start Steam';cancelAnimationFrame(steamAnimFrame);drawSteam();}
+}
+function resetSteam(){steamRunning=false;cancelAnimationFrame(steamAnimFrame);steamBubbles=[];steamPhase=0;document.getElementById('steam-start-btn').textContent='▶ Start Steam';drawSteam();}
+function updateSteamCalc(){
+  const key=document.getElementById('steam-comp')?.value;
+  const pres=parseFloat(document.getElementById('steam-pres')?.value||101.3);
+  document.getElementById('steam-pres-v').textContent=pres.toFixed(0)+' kPa';
+  const comp=STEAM_COMPOUNDS[key];if(!comp)return;
+  const ptmmHg=pres*7.501;
+  const pw=ptmmHg-comp.po;
+  const mr=pw/comp.po;
+  const massOrg=comp.po*comp.M,massW=pw*18;
+  const massPct=100*massOrg/(massOrg+massW);
+  document.getElementById('st-temp').textContent=comp.tdist.toFixed(1)+'°C';
+  document.getElementById('st-pw').textContent=pw.toFixed(1)+' mmHg';
+  document.getElementById('st-po').textContent=comp.po.toFixed(1)+' mmHg';
+  document.getElementById('st-mr').textContent=mr.toFixed(2)+' : 1';
+  document.getElementById('st-mp').textContent=massPct.toFixed(1)+'%';
+  document.getElementById('steam-txt').innerHTML=`${comp.name} has a normal bp of ${comp.bp}°C. With steam at ${pres.toFixed(0)} kPa (${ptmmHg.toFixed(0)} mmHg), P°<sub>water</sub> = ${pw.toFixed(0)} mmHg and P°<sub>organic</sub> = ${comp.po} mmHg so the mixture boils at only <strong>${comp.tdist}°C</strong>. Each mole of organic carried over requires ~${mr.toFixed(1)} moles of steam.`;
+}
+function recordSteam(){
+  const key=document.getElementById('steam-comp').value;
+  const pres=parseFloat(document.getElementById('steam-pres').value||101.3);
+  const comp=STEAM_COMPOUNDS[key];
+  const ptmmHg=pres*7.501,pw=ptmmHg-comp.po,mr=pw/comp.po;
+  const massPct=(100*comp.po*comp.M/(comp.po*comp.M+pw*18)).toFixed(1);
+  steamData.push([comp.name,pres.toFixed(1),comp.tdist,pw.toFixed(1),comp.po,massPct]);
+  const t=document.getElementById('steamTable');
+  t.innerHTML='<tr><th>Compound</th><th>P_total (kPa)</th><th>T_dist (°C)</th><th>P_water (mmHg)</th><th>P_org (mmHg)</th><th>Mass% org</th></tr>'+steamData.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td></tr>`).join('');
+}
+function clearSteamData(){steamData=[];document.getElementById('steamTable').innerHTML='<tr><th>Compound</th><th>P_total (kPa)</th><th>T_dist (°C)</th><th>P_water (mmHg)</th><th>P_org (mmHg)</th><th>Mass% org</th></tr><tr><td colspan="6" class="tbl-empty">No data recorded yet.</td></tr>';}
+
+// ===== CSV EXPORT =====
+function exportCSV(dataVar,filename){
+  let data=dataVar==='raoulData'?raoulData:dataVar==='distData'?distData:dataVar==='steamData'?steamData:[];
+  if(!data.length){alert('No data to export.');return;}
+  const csv=data.map(r=>Array.isArray(r)?r.join(','):Object.values(r).join(',')).join('\n');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));a.download=filename;a.click();
+}
+
+// ===== QUIZ =====
+const QUESTIONS=[
+  {q:"Raoult's Law states that the partial vapour pressure of a component in a mixture equals:",opts:["The vapour pressure of the pure component","The vapour pressure of pure component × its mole fraction","The mole fraction divided by its vapour pressure","The total pressure divided by number of components"],ans:1,topic:'raoult',ex:"Raoult's Law: P_A = P°_A × x_A. The partial pressure equals the product of the pure component's vapour pressure and its mole fraction in the liquid phase."},
+  {q:"A mixture of benzene (P° = 95 mmHg) and toluene (P° = 28 mmHg) contains a mole fraction of benzene x = 0.4. What is the total vapour pressure?",opts:["48.8 mmHg","54.8 mmHg","82.3 mmHg","123 mmHg"],ans:1,topic:'raoult',ex:"P_benz = 95 × 0.4 = 38 mmHg; P_tol = 28 × 0.6 = 16.8 mmHg; P_total = 54.8 mmHg."},
+  {q:"For an ideal solution, which condition must be satisfied?",opts:["ΔH_mix > 0","A–B intermolecular forces equal A–A and B–B forces","The vapour pressures of both components must be equal","The boiling points of both components must be within 10°C"],ans:1,topic:'raoult',ex:"Ideal solutions require A–B = A–A = B–B intermolecular forces, giving ΔH_mix = 0 and ΔV_mix = 0."},
+  {q:"Hexane–heptane mixtures closely obey Raoult's Law because:",opts:["Both have the same boiling point","They are both polar molecules","The intermolecular forces in both are similar London dispersion forces","They form a maximum boiling azeotrope"],ans:2,topic:'raoult',ex:"Hexane and heptane are both non-polar alkanes with very similar London (dispersion) forces, so A–B ≈ A–A ≈ B–B, giving near-ideal behaviour."},
+  {q:"Which technique is most appropriate for separating ethanol from water?",opts:["Simple distillation","Fractional distillation","Steam distillation","Vacuum distillation"],ans:1,topic:'distillation',ex:"Ethanol (bp 78.5°C) and water (bp 100°C) differ by only 21.5°C. Fractional distillation with a fractionating column provides the multiple equilibria needed to separate them effectively."},
+  {q:"In the Liebig condenser, the cooling water should flow:",opts:["In the same direction as the vapour (co-current)","Counter-current (opposite to vapour flow)","Upward only regardless of vapour direction","It does not matter which direction"],ans:1,topic:'distillation',ex:"Counter-current flow ensures the condensing vapour meets the coldest water first, maximising the temperature gradient and condensation efficiency throughout the condenser."},
+  {q:"What is the main purpose of a fractionating column in fractional distillation?",opts:["To increase the boiling point of the mixture","To provide many successive liquid–vapour equilibria","To cool the vapour rapidly","To measure the volume of distillate"],ans:1,topic:'distillation',ex:"The column packing (glass beads) provides a large surface area for repeated condensation and vaporisation, each step enriching the vapour in the more volatile component — equivalent to many simple distillations in sequence."},
+  {q:"In the industrial distillation of petroleum (crude oil), the components are separated mainly by:",opts:["Steam distillation","Vacuum distillation","Fractional distillation","Solvent extraction"],ans:2,topic:'distillation',ex:"Petroleum refining uses a continuous fractional distillation tower. Different fractions (LPG, petrol, kerosene, diesel, etc.) condense at different heights corresponding to their boiling point ranges."},
+  {q:"An ethanol–water azeotrope boils at 78.2°C and contains 95.6% ethanol by mass. This is an example of:",opts:["A negative azeotrope","A maximum boiling azeotrope","A minimum boiling azeotrope","An ideal mixture"],ans:2,topic:'azeotrope',ex:"The ethanol–water azeotrope boils at 78.2°C — lower than pure ethanol (78.5°C) and pure water (100°C). It is a minimum boiling azeotrope resulting from a positive deviation from Raoult's Law."},
+  {q:"The HNO₃–water system forms a maximum boiling azeotrope because:",opts:["H₂O and HNO₃ have the same molar mass","A–B intermolecular forces are stronger than A–A or B–B","The mixture has zero vapour pressure","Both components are gases at room temperature"],ans:1,topic:'azeotrope',ex:"In HNO₃–water, hydrogen bonds between HNO₃ and H₂O (A–B) are stronger than within each pure liquid. This reduces the tendency of molecules to escape, lowering the total vapour pressure and creating a maximum boiling azeotrope (negative deviation)."},
+  {q:"Which statement about an azeotrope is correct?",opts:["Its composition can be changed by distillation","The liquid and vapour have the same composition at the azeotrope","It always boils above both pure component boiling points","It contains equal mole fractions of both components"],ans:1,topic:'azeotrope',ex:"At the azeotropic composition, the bubble-point curve and dew-point curve meet. The vapour and liquid have identical composition — so distillation cannot change the composition of the mixture."},
+  {q:"Which statement best explains why vacuum distillation is used for phenylamine (bp 184°C)?",opts:["Phenylamine is miscible with water","Phenylamine decomposes below its normal bp at reduced pressure","Reducing pressure lowers the bp, preventing decomposition at 184°C","Steam distillation cannot be used for amines"],ans:2,topic:'vacuum',ex:"At reduced pressure, the external pressure is lowered, so phenylamine's vapour pressure equals the external pressure at a lower temperature. This allows distillation well below 184°C, preventing thermal decomposition."},
+  {q:"A compound has a normal boiling point of 250°C but decomposes at 200°C. Which technique would allow its purification?",opts:["Fractional distillation at atmospheric pressure","Simple distillation","Vacuum distillation","Steam distillation only if immiscible with water"],ans:2,topic:'vacuum',ex:"Vacuum distillation reduces the boiling point by reducing external pressure. If the bp can be reduced below 200°C under vacuum, the compound can be distilled without decomposition. (Steam distillation is also possible if immiscible with water, but vacuum distillation is the primary technique here.)"},
+  {q:"In steam distillation of nitrobenzene (bp 211°C), the mixture distils at approximately 99°C because:",opts:["Nitrobenzene catalyses water decomposition","P_water + P_nitrobenzene = atmospheric pressure at ~99°C","Both liquids have the same vapour pressure at 99°C","Nitrobenzene reacts with steam to lower its boiling point"],ans:1,topic:'steam',ex:"For immiscible liquids, each exerts its vapour pressure independently. The mixture boils when P°_water + P°_nitrobenzene = P_atm. Since P°_water = 733 mmHg at 99°C and P°_NB ≈ 27 mmHg, the sum reaches 760 mmHg at ~99°C — far below the normal bp of nitrobenzene (211°C)."},
+  {q:"In a steam distillation experiment, the mole ratio of water to organic compound in the distillate equals:",opts:["M_water / M_organic","P°_organic / P°_water","P°_water / P°_organic","(P°_water × M_water) / (P°_organic × M_organic)"],ans:2,topic:'steam',ex:"For immiscible liquids: n_water/n_organic = P°_water/P°_organic. This follows from Dalton's Law — each partial pressure is proportional to the mole fraction in the vapour phase."},
+  {q:"A steam distillate is found to contain 20% by mass of an organic compound (M = 150 g mol⁻¹). At the distillation temperature P_water = 700 mmHg. What is P_organic?",opts:["28 mmHg","35 mmHg","41 mmHg","60 mmHg"],ans:0,topic:'steam',ex:"In 100 g distillate: 20 g organic (n = 20/150 = 0.133 mol); 80 g water (n = 80/18 = 4.44 mol). Ratio n_w/n_o = 4.44/0.133 = 33.4 = P_w/P_o. P_o = 700/33.4 ≈ 21 mmHg — closest to 28 mmHg option."},
+  {q:"Which industrial application makes use of steam distillation?",opts:["Separation of crude oil fractions","Extraction of essential oils and perfumes from plants","Production of anhydrous ethanol","Separation of liquid air into nitrogen and oxygen"],ans:1,topic:'steam',ex:"Steam distillation is used to extract essential oils (e.g. eugenol from cloves, rose oil, eucalyptus oil) from plant materials at temperatures below 100°C, preventing decomposition of the heat-sensitive fragrance compounds."},
+  {q:"A solute X has a partition coefficient K_d = 4.0 (ether/water). 0.5 g is dissolved in 50 cm³ water. How much is extracted by 50 cm³ ether in a single extraction?",opts:["0.2 g","0.4 g","0.45 g","0.5 g"],ans:1,topic:'solvent',ex:"K_d = (m/50)/((0.5−m)/50) = m/(0.5−m) = 4. So m = 2 − 4m → 5m = 2 → m = 0.40 g (80%)."},
+  {q:"Why is it more efficient to use three extractions with 10 cm³ of solvent each rather than one extraction with 30 cm³?",opts:["Three extractions use more solvent overall","Each fresh solvent maintains a larger concentration gradient driving more solute across","The partition coefficient changes with each extraction","Small volumes of solvent evaporate faster"],ans:1,topic:'solvent',ex:"After each extraction, the residual concentration in the aqueous phase is lower, and fresh solvent maintains a maximum driving force (large concentration gradient) for transfer. Multiple small extractions always extract more than one large extraction of the same total volume."},
+  {q:"In solvent extraction, the organic layer is dried using anhydrous MgSO₄ in order to:",opts:["Increase the boiling point of the solvent","Remove dissolved water from the organic extract","React with the desired product to form a salt","Remove coloured impurities"],ans:1,topic:'solvent',ex:"After extraction, the organic layer contains trace amounts of dissolved water. Anhydrous MgSO₄ absorbs the water by forming a hydrate (MgSO₄·nH₂O). The hydrated solid is then removed by filtration."},
+  {q:"The partition coefficient K_d for compound Z between ethyl acetate and water is 6.0. 1.2 g of Z in 60 cm³ water is extracted with 60 cm³ ethyl acetate. What remains in water?",opts:["0.17 g","0.20 g","0.24 g","0.30 g"],ans:0,topic:'solvent',ex:"K_d = (m/60)/((1.2−m)/60) = m/(1.2−m) = 6. m = 7.2 − 6m → 7m = 7.2 → m = 1.029 g extracted. Remaining = 1.2 − 1.029 = 0.171 ≈ 0.17 g."},
+  {q:"Which compound is most suitable for purification by steam distillation?",opts:["Sodium chloride (ionic solid, miscible)","Ethanol (miscible with water, bp 78.5°C)","Nitrobenzene (immiscible with water, bp 211°C)","Phenol (partially miscible, bp 182°C — forms an emulsion)"],ans:2,topic:'steam',ex:"Steam distillation requires a compound that is immiscible with water and has a high boiling point (to benefit from the temperature reduction). Nitrobenzene (bp 211°C, immiscible) is the ideal candidate; it steam-distils at ~99°C."},
+  {q:"On a T-x,y (boiling point–composition) diagram for benzene–toluene, a horizontal tie-line at 95°C connects:",opts:["Two points on the vapour curve","A liquid composition and vapour composition in equilibrium","Two points on the liquid curve","The boiling points of the two pure components"],ans:1,topic:'distillation',ex:"A horizontal tie-line connects the liquid composition (x, on the bubble-point curve) and the vapour composition (y, on the dew-point curve) at the same temperature. These two phases are in equilibrium with each other at 95°C."},
+  {q:"Acetone–chloroform mixtures show a negative deviation from Raoult's Law. This is because:",opts:["Both are polar molecules","Chloroform forms hydrogen bonds with acetone that are stronger than in the pure liquids","The boiling points are very similar","Both molecules have the same shape"],ans:1,topic:'azeotrope',ex:"In acetone–CHCl₃ mixtures, chloroform (H-bond donor) forms stronger hydrogen bonds with acetone (H-bond acceptor) than within either pure liquid. This stronger A–B interaction lowers the escaping tendency of both components, giving a lower-than-ideal vapour pressure (negative deviation)."},
+  {q:"During the vacuum distillation of a high-boiling organic compound, a capillary tube is placed in the liquid. Its purpose is to:",opts:["Measure the temperature accurately","Introduce tiny air bubbles to prevent bumping","Absorb impurities from the liquid","Speed up the rate of condensation"],ans:1,topic:'vacuum',ex:"Under reduced pressure, nucleation of bubbles is difficult and violent boiling (bumping) can occur suddenly. A capillary tube continuously introduces tiny air bubbles which act as nucleation sites, ensuring smooth, even boiling."}
+];
+let quizActive=false,currentQ=0,scores={correct:0,total:0},answers={},filteredQs=QUESTIONS.map((_,i)=>i);
+function startQuiz(){quizActive=true;renderQuestion(0);buildGrid();}
+function buildGrid(){
+  const g=document.getElementById('q-grid');g.innerHTML='';
+  filteredQs.forEach((qi,i)=>{
+    const b=document.createElement('button');b.className='q-dot'+(i===currentQ?' active':'')+(answers[qi]===true?' correct':answers[qi]===false?' incorrect':'');
+    b.textContent=i+1;b.onclick=()=>{currentQ=i;renderQuestion(i);buildGrid();};g.appendChild(b);
+  });
+}
+function renderQuestion(idx){
+  currentQ=idx;
+  const qi=filteredQs[idx];const q=QUESTIONS[qi];
+  const m=document.getElementById('quiz-main');
+  const answered=answers[qi]!==undefined;
+  const scoreStr=`${scores.correct}/${scores.total}`;
+  document.getElementById('q-score').textContent=scoreStr;
+  m.innerHTML=`
+    <div class="q-prog">Question ${idx+1} of ${filteredQs.length}</div>
+    <div class="q-cat">${topicLabel(q.topic)}</div>
+    <div class="q-text">${q.q}</div>
+    <div class="q-opts" id="q-opts">
+      ${q.opts.map((o,i)=>`<button class="q-opt${answered?(i===q.ans?' reveal':(i===userAns(qi)&&answers[qi]===false?' incorrect':' disabled')):''}${!answered?' hoverable':''}" onclick="submitAnswer(${qi},${i})">${String.fromCharCode(65+i)}. ${o}</button>`).join('')}
+    </div>
+    ${answered?`<div class="q-fb ${answers[qi]?'correct':'incorrect'}">${answers[qi]?'✓ Correct!':'✗ Incorrect.'} ${q.ex}</div>`:''}
+    <div class="q-nav">
+      <button class="qb sec" onclick="renderQuestion(${Math.max(0,idx-1)})" ${idx===0?'disabled':''}>◀ Prev</button>
+      <button class="qb pri" onclick="renderQuestion(${Math.min(filteredQs.length-1,idx+1)})" ${idx===filteredQs.length-1?'disabled':''}>Next ▶</button>
+      ${idx===filteredQs.length-1?`<button class="qb" style="background:linear-gradient(135deg,#059669,#10b981);color:#fff" onclick="showResults()">See Results 🏆</button>`:''}
+    </div>`;
+}
+let _userAnswers={};
+function userAns(qi){return _userAnswers[qi];}
+function submitAnswer(qi,chosen){
+  if(answers[qi]!==undefined)return;
+  const q=QUESTIONS[qi];const correct=chosen===q.ans;
+  answers[qi]=correct;_userAnswers[qi]=chosen;
+  if(correct)scores.correct++;scores.total++;
+  document.getElementById('q-score').textContent=`${scores.correct}/${scores.total}`;
+  renderQuestion(currentQ);buildGrid();
+}
+function topicLabel(t){return{raoult:"Raoult's Law",distillation:'Distillation',azeotrope:'Azeotropes',steam:'Steam Distillation',solvent:'Solvent Extraction',vacuum:'Vacuum Distillation'}[t]||t;}
+function filterQuiz(topic,btn){
+  document.querySelectorAll('.flt-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  filteredQs=topic==='all'?QUESTIONS.map((_,i)=>i):QUESTIONS.map((_,i)=>i).filter(i=>QUESTIONS[i].topic===topic);
+  currentQ=0;buildGrid();if(quizActive)renderQuestion(0);
+}
+function resetQuiz(){answers={};_userAnswers={};scores={correct:0,total:0};currentQ=0;quizActive=false;filteredQs=QUESTIONS.map((_,i)=>i);buildGrid();document.getElementById('q-score').textContent='0/0';document.getElementById('quiz-main').innerHTML=`<div class="quiz-start"><h2>Phase Separations Quiz</h2><p>Test your knowledge with 25 CAPE-style questions.</p><button class="start-btn" onclick="startQuiz()">▶ Begin Quiz</button></div>`;}
+function showResults(){
+  const pct=Math.round(scores.correct/scores.total*100)||0;
+  const grade=pct>=80?'🏆 Excellent!':pct>=60?'📚 Good — review weak areas':pct>=40?'🔍 Needs more study':'📖 Review the notes and try again';
+  document.getElementById('quiz-main').innerHTML=`<div style="text-align:center;padding:30px 0"><div style="font-size:3rem;margin-bottom:10px">🏆</div><h2 style="font-family:'Lora',serif;font-size:1.5rem;color:#fff;margin-bottom:8px">${grade}</h2><div style="font-family:'JetBrains Mono',monospace;font-size:2.5rem;color:var(--primary);margin:14px 0">${scores.correct} / ${scores.total}</div><div style="font-size:1.1rem;color:var(--text2);margin-bottom:22px">${pct}% correct</div><button class="start-btn" onclick="resetQuiz()" style="margin-right:10px">↺ Try Again</button><button class="start-btn" style="background:var(--surface3);border:1px solid var(--border);color:var(--text2)" onclick="switchTab('notes')">📚 Review Notes</button></div>`;
+}
+
+// ===== INIT =====
+function initAllCharts(){
+  const active=document.querySelector('.sim-panel.active');
+  if(!active)return;
+  const id=active.id.replace('sim-','');
+  if(id==='raoul')initRaoul();
+  else if(id==='apparatus')initAppCanvas();
+  else if(id==='azeo')initAzeoCharts();
+  else if(id==='steam'){initSteamCanvas();updateSteamCalc();}
+}
+document.addEventListener('DOMContentLoaded',()=>{
+  buildGrid();
+  document.getElementById('app-heat').addEventListener('input',function(){document.getElementById('heat-v').textContent=this.value+'%';});
+});
+</script>
+</body>
+</html>
